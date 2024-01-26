@@ -15,7 +15,7 @@ let scene = new THREE.Scene();
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(ambientLight);
 
-const light = new THREE.DirectionalLight(0xffffff, 1);
+const light = new THREE.DirectionalLight(0xffffff, 3);
 light.position.set(1, 1, 1);
 scene.add(light);
 
@@ -29,6 +29,17 @@ const colorTexture = textureLoader.load(
   "./car/PaintedMetal03_4K_BaseColor.png"
 );
 colorTexture.magFilter = THREE.LinearFilter;
+const ambientOcclusionTexture = textureLoader.load(
+  "./car/PaintedMetal03_4K_AO.png"
+);
+const heightTexture = textureLoader.load("./car/PaintedMetal03_4K_Height.png");
+const normalTexture = textureLoader.load("./car/PaintedMetal03_4K_Normal.png");
+const metalnessTexture = textureLoader.load(
+  "./car/PaintedMetal03_4K_Metallic.png"
+);
+const roughnessTexture = textureLoader.load(
+  "./car/PaintedMetal03_4K_Roughness.png"
+);
 
 /**
  * Sizes
@@ -127,8 +138,20 @@ if (retrievedVanType === "Ford Transit") {
     van = gltf.scene;
     vanWalls = van.children[5];
 
-    const material = new THREE.MeshBasicMaterial({ map: colorTexture });
+    const material = new THREE.MeshStandardMaterial({ map: colorTexture });
     vanWalls.children[0].material = material;
+    material.metalness = 0;
+    material.roughness = 1;
+    material.map = colorTexture;
+    material.aoMap = ambientOcclusionTexture;
+    material.aoMapIntensity = 1;
+    material.displacementMap = heightTexture;
+    material.displacementScale = 0.05;
+    material.metalnessMap = metalnessTexture;
+    material.roughnessMap = roughnessTexture;
+    material.normalMap = normalTexture;
+    material.normalScale.set(1, 1);
+    material.transparent = true;
 
     // backPlane = van.getObjectByName("backPlane");
     // floorPlane = van.getObjectByName("floorPlane");
