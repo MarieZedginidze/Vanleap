@@ -19,6 +19,17 @@ const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(1, 1, 1);
 scene.add(light);
 
+THREE.ColorManagement.enabled = false;
+/**
+ * Textures
+ */
+const loadingManager = new THREE.LoadingManager();
+const textureLoader = new THREE.TextureLoader(loadingManager);
+const colorTexture = textureLoader.load(
+  "./car/PaintedMetal03_4K_BaseColor.png"
+);
+colorTexture.magFilter = THREE.LinearFilter;
+
 /**
  * Sizes
  */
@@ -64,6 +75,7 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor(0xefefef, 1);
+renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
 /**
  *  Controls
@@ -78,9 +90,9 @@ controls.maxDistance = 20;
 
 // Changed how far you can orbit vertically, upper and lower limits.
 controls.minPolarAngle = 0; // radians
-controls.maxPolarAngle = 1.3; // radians
+controls.maxPolarAngle = 1.9; // radians
 
-//controls.enabled = false;
+// controls.enabled = false;
 
 // Transform Controls
 const transformControls = new TransformControls(camera, renderer.domElement);
@@ -92,6 +104,8 @@ scene.add(transformControls);
 const gltfLoader = new GLTFLoader();
 
 let van;
+let vanWalls;
+
 // let backPlane;
 // let floorPlane;
 // let truckPlane;
@@ -109,9 +123,13 @@ let vanType;
 let retrievedVanType = JSON.parse(localStorage.getItem("carType"));
 if (retrievedVanType === "Ford Transit") {
   vanType = "Ford Transit";
-
   gltfLoader.load("/models/l2h2.glb", (gltf) => {
     van = gltf.scene;
+    vanWalls = van.children[5];
+
+    const material = new THREE.MeshBasicMaterial({ map: colorTexture });
+    vanWalls.children[0].material = material;
+
     // backPlane = van.getObjectByName("backPlane");
     // floorPlane = van.getObjectByName("floorPlane");
     // truckPlane = van.getObjectByName("truckPlane");

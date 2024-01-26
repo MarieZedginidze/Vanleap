@@ -1,5 +1,5 @@
-let testCar1 = document.getElementById("test-car");
-let testCar2 = document.getElementById("test-car2");
+let testCar1 = document.getElementById("l2h2");
+let testCar2 = document.getElementById("l3h3");
 
 let vanType;
 testCar1.addEventListener("click", () => {
