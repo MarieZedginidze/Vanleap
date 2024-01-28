@@ -493,20 +493,23 @@ function loadCameraLocation() {
   camera.rotation.z = parseFloat(localStorage.getItem("camera.rotation.z"));
 }
 
+// Save the Models and the Scene to the Localstorage
 function saveScene() {
   saveCameraLocation();
   localStorage.setItem("localModels", JSON.stringify(models));
 
-  // Save whole scene
+  // Save the whole scene
   let result = scene.toJSON();
   localStorage.savedScene = JSON.stringify(result);
 }
+
+// Load the Scene from Localstorage
 function loadScene() {
   let loader = new THREE.ObjectLoader();
 
   let retrievedModels = JSON.parse(localStorage.getItem("localModels"));
-  for (const modelGrop of retrievedModels) {
-    loader.parse(modelGrop.model, function (e) {
+  for (const modelGroup of retrievedModels) {
+    loader.parse(modelGroup.model, function (e) {
       models.push({ model: e });
       scene.add(e);
     });
