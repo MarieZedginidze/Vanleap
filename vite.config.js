@@ -10,12 +10,13 @@ export default {
     outDir: "../dist", // Output in the dist/ folder
     emptyOutDir: true, // Empty the folder first
     sourcemap: true, // Add sourcemap
-    // rollupOptions: {
-    //   input: {
-    //     main: "./index.html",
-    //     vanBuilder: "./about.html",
-    //     shaderOne: "./shaderOne.html",
-    //   },
-    // },
+    rollupOptions: {
+      input: {
+        main: "/index.html",
+        vanBuilder: "/VanBuilder/Van.html",
+        ChooseCar: "/ChooseCar/Choose-car.html",
+        Questionary: "/Questionary/Questionary.html",
+      },
+    },
   },
 };
