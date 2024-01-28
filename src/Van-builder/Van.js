@@ -19,28 +19,6 @@ const light = new THREE.DirectionalLight(0xffffff, 2.5);
 light.position.set(2, 2, 2);
 scene.add(light);
 
-THREE.ColorManagement.enabled = false;
-/**
- * Textures
- */
-const loadingManager = new THREE.LoadingManager();
-const textureLoader = new THREE.TextureLoader(loadingManager);
-const colorTexture = textureLoader.load(
-  "./car/PaintedMetal03_4K_BaseColor.png"
-);
-colorTexture.magFilter = THREE.LinearFilter;
-const ambientOcclusionTexture = textureLoader.load(
-  "./car/PaintedMetal03_4K_AO.png"
-);
-const heightTexture = textureLoader.load("./car/PaintedMetal03_4K_Height.png");
-const normalTexture = textureLoader.load("./car/PaintedMetal03_4K_Normal.png");
-const metalnessTexture = textureLoader.load(
-  "./car/PaintedMetal03_4K_Metallic.png"
-);
-const roughnessTexture = textureLoader.load(
-  "./car/PaintedMetal03_4K_Roughness.png"
-);
-
 /**
  * Sizes
  */
@@ -115,7 +93,6 @@ scene.add(transformControls);
 const gltfLoader = new GLTFLoader();
 
 let van;
-let vanWalls;
 
 // let backPlane;
 // let floorPlane;
@@ -136,22 +113,6 @@ if (retrievedVanType === "Ford Transit") {
   vanType = "Ford Transit";
   gltfLoader.load("/models/l2h2.glb", (gltf) => {
     van = gltf.scene;
-    vanWalls = van.children[5];
-
-    const material = new THREE.MeshStandardMaterial({ map: colorTexture });
-    // vanWalls.children[0].material = material;
-    material.metalness = 0;
-    material.roughness = 1;
-    material.map = colorTexture;
-    material.aoMap = ambientOcclusionTexture;
-    material.aoMapIntensity = 1;
-    material.displacementMap = heightTexture;
-    material.displacementScale = 0.05;
-    material.metalnessMap = metalnessTexture;
-    material.roughnessMap = roughnessTexture;
-    material.normalMap = normalTexture;
-    material.normalScale.set(1, 1);
-    material.transparent = true;
 
     // backPlane = van.getObjectByName("backPlane");
     // floorPlane = van.getObjectByName("floorPlane");
@@ -358,7 +319,7 @@ closeBtn.addEventListener("click", () => {
 // Get Model from the attachControls Function
 let modelFromIntersection;
 
-function getClickedModel(model) {
+function toggleDeleteBtn(model) {
   if (model) {
     // If there is an intersecting model, enable the button
     deleteBtn.disabled = false;
@@ -387,7 +348,6 @@ function deleteModel() {
     let localStorageIndex = retrievedModels.indexOf(modelToDelete);
     retrievedModels.splice(localStorageIndex, 1);
 
-    console.log(models);
     // resetting localstorage to the new array
     localStorage.setItem("localModels", JSON.stringify(retrievedModels));
   }
@@ -433,11 +393,11 @@ function attachControls(pointer) {
 
         // Check Model's Names and Send it to the Sidebar Function
         displaySidebar(intersectModel[0].object.name);
-        getClickedModel(intersectModel[0].object);
+        toggleDeleteBtn(intersectModel[0].object);
         displayModelSizes();
       } else {
         transformControls.detach();
-        getClickedModel(undefined);
+        toggleDeleteBtn(undefined);
       }
     }
   }
@@ -454,11 +414,11 @@ function attachControls(pointer) {
       transformControls.attach(firstObject);
       // Check Model's Names and Send it to the Sidebar Function
       displaySidebar(firstObject.children[0].name);
-      getClickedModel(firstObject.children[0]);
+      toggleDeleteBtn(firstObject.children[0]);
       displayModelSizes();
     } else {
       transformControls.detach();
-      getClickedModel(undefined);
+      toggleDeleteBtn(undefined);
     }
   }
 }
@@ -535,14 +495,7 @@ function loadCameraLocation() {
 
 function saveScene() {
   saveCameraLocation();
-  let existingModels = [];
-
-  for (let i = 0; i < models.length; i++) {
-    let model = models[i].model;
-
-    existingModels.push({ model });
-    localStorage.setItem("localModels", JSON.stringify(existingModels));
-  }
+  localStorage.setItem("localModels", JSON.stringify(models));
 
   // Save whole scene
   let result = scene.toJSON();
