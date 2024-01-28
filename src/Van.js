@@ -63,7 +63,7 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setClearColor(0xefefef, 1);
+renderer.setClearColor(0xf4f5ff, 1);
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
 /**

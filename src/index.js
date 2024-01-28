@@ -6,9 +6,9 @@ let retrievedVanType = localStorage.getItem("carType");
 for (const builderRedirect of builderRedirects) {
   builderRedirect.addEventListener("click", () => {
     if (retrievedVanType === "undefined" || !retrievedVanType) {
-      window.location.replace("/ChooseCar/Choose-car.html");
+      window.location.replace("/Choose-car.html");
     } else {
-      window.location.replace("/VanBuilder/Van.html");
+      window.location.replace("/Van.html");
     }
   });
 }

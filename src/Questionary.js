@@ -24,9 +24,9 @@ let retrievedVanType = localStorage.getItem("carType");
 
 vanBuilderLink.addEventListener("click", () => {
   if (retrievedVanType === "undefined" || !retrievedVanType) {
-    window.location.replace("/ChooseCar/Choose-car.html");
+    window.location.replace("/Choose-car.html");
   } else {
-    window.location.replace("/VanBuilder/Van.html");
+    window.location.replace("/Van.html");
   }
 });
 /* 
@@ -197,6 +197,6 @@ form.addEventListener("submit", (event) => {
   if (peopleAmount && activities.length && facilities.length) {
     let car = suggestCarSize(peopleAmount, activities, facilities);
     localStorage.setItem("carType", JSON.stringify(car));
-    window.location.replace("/VanBuilder/Van.html");
+    window.location.replace("/Van.html");
   }
 });

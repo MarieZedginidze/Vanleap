@@ -5,11 +5,11 @@ let vanType;
 testCar1.addEventListener("click", () => {
   vanType = "Ford Transit";
   localStorage.setItem("carType", JSON.stringify(vanType));
-  window.location.replace("/VanBuilder/Van.html");
+  window.location.replace("/Van.html");
 });
 
 testCar2.addEventListener("click", () => {
   vanType = "Mercedes Benz";
   localStorage.setItem("carType", JSON.stringify(vanType));
-  window.location.replace("/VanBuilder/Van.html");
+  window.location.replace("/Van.html");
 });
