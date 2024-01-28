@@ -15,8 +15,8 @@ let scene = new THREE.Scene();
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(ambientLight);
 
-const light = new THREE.DirectionalLight(0xffffff, 3);
-light.position.set(1, 1, 1);
+const light = new THREE.DirectionalLight(0xffffff, 2.5);
+light.position.set(2, 2, 2);
 scene.add(light);
 
 THREE.ColorManagement.enabled = false;
@@ -101,7 +101,7 @@ controls.maxDistance = 20;
 
 // Changed how far you can orbit vertically, upper and lower limits.
 controls.minPolarAngle = 0; // radians
-controls.maxPolarAngle = 1.9; // radians
+controls.maxPolarAngle = 1.3; // radians
 
 // controls.enabled = false;
 
@@ -139,7 +139,7 @@ if (retrievedVanType === "Ford Transit") {
     vanWalls = van.children[5];
 
     const material = new THREE.MeshStandardMaterial({ map: colorTexture });
-    vanWalls.children[0].material = material;
+    // vanWalls.children[0].material = material;
     material.metalness = 0;
     material.roughness = 1;
     material.map = colorTexture;
@@ -375,9 +375,21 @@ function getClickedModel(model) {
 let deleteBtn = document.getElementById("delete-btn");
 function deleteModel() {
   if (modelFromIntersection) {
+    // remove model from the scene and hide info sidebar
     transformControls.detach();
+    modelFromIntersection.parent.removeFromParent(scene);
     modelFromIntersection.removeFromParent(scene);
     infoSidebar.style.display = "none";
+
+    // remove model from the localstorage
+    let modelToDelete = modelFromIntersection;
+    let retrievedModels = JSON.parse(localStorage.getItem("localModels"));
+    let localStorageIndex = retrievedModels.indexOf(modelToDelete);
+    retrievedModels.splice(localStorageIndex, 1);
+
+    console.log(models);
+    // resetting localstorage to the new array
+    localStorage.setItem("localModels", JSON.stringify(retrievedModels));
   }
 }
 deleteBtn.addEventListener("click", deleteModel);
