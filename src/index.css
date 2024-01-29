@@ -7,6 +7,10 @@
   font-family: "Fontspring-DEMO-tt_commons_pro_expanded_demibold";
   src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_demibold.woff2");
 }
+@font-face {
+  font-family: "Gilroy-Thin";
+  src: url("fonts/Gilroy-Thin.ttf");
+}
 
 * {
   box-sizing: border-box;
@@ -39,6 +43,15 @@ button {
 button:hover,
 button:focus {
   transform: scale(1.1);
+}
+
+nav,
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
 }
 /* =================
    Typography 
@@ -73,18 +86,20 @@ strong {
    Navbar 
    ================= */
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  padding: 0 12em;
-  background-color: #cacaca11;
+  padding: 0 1em 0 6em;
+  border-bottom: 1px solid black;
 }
 
 .builderRedirectBtn {
   background: #ff5400;
   color: white;
+}
+
+.navCTAS {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
 }
 
 /* =================
@@ -103,12 +118,28 @@ nav {
 }
 
 /* =================
-   redirectionCTAs 
+   second CTA Section 
    ================= */
-.redirectionCTAs {
+.secondCTASection {
+  padding: 2em 0 10em 0;
+}
+
+/* =================
+   Footer 
+   ================= */
+footer {
+  padding: 1em 2em;
+  font-family: "Gilroy-Thin";
+  border-top: 1px solid black;
+}
+.contact {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 2em;
-  padding: 3em;
+  align-items: center;
+  gap: 1em;
+}
+
+#email-svg {
+  width: 30px;
+  height: 30px;
 }
