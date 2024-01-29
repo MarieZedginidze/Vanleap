@@ -63,7 +63,7 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setClearColor(0xf4f5ff, 1);
+renderer.setClearColor(0xffffff, 1);
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
 /**
@@ -336,23 +336,12 @@ function toggleDeleteBtn(model) {
 let deleteBtn = document.getElementById("delete-btn");
 function deleteModel() {
   if (modelFromIntersection) {
-    // remove model from the models array
-    let modelsIndex = models.indexOf(modelFromIntersection);
-    models.splice(modelsIndex, 1);
-    console.log(models);
-    // remove model from the scene and hide info sidebar
-    transformControls.detach();
-
-    modelFromIntersection.parent.removeFromParent(scene);
     modelFromIntersection.removeFromParent(scene);
-    infoSidebar.style.display = "none";
 
-    // remove model from the localstorage
-    // let retrievedModels = JSON.parse(localStorage.getItem("localModels"));
-    // let localStorageIndex = retrievedModels.indexOf(modelFromIntersection);
-    // retrievedModels.splice(localStorageIndex, 1);
-    // resetting localstorage to the new array
-    localStorage.setItem("localModels", JSON.stringify(models));
+    // remove model from the scene
+    transformControls.detach();
+    // Hide info Sidebar
+    infoSidebar.style.display = "none";
   }
 }
 deleteBtn.addEventListener("click", deleteModel);

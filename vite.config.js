@@ -13,7 +13,7 @@ export default {
 
     rollupOptions: {
       input: {
-        main: "/",
+        main: "/index.html",
         vanBuilder: "/Van.html",
         ChooseCar: "/Choose-car.html",
         Questionary: "/Questionary.html",
