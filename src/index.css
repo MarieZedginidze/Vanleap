@@ -20,8 +20,7 @@
 
 body {
   margin: 0;
-  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_thin", Fallback,
-    sans-serif;
+  font-family: "Gilroy-Thin", Fallback, sans-serif;
   font-size: 1rem;
   color: #0a0a0a;
   line-height: 1.6;
@@ -47,10 +46,10 @@ button:focus {
 
 nav,
 footer {
+  position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
   width: 100%;
 }
 /* =================
@@ -87,7 +86,6 @@ strong {
    ================= */
 nav {
   padding: 0 1em 0 6em;
-  border-bottom: 1px solid black;
 }
 
 .builderRedirectBtn {
@@ -121,7 +119,7 @@ nav {
    second CTA Section 
    ================= */
 .secondCTASection {
-  padding: 2em 0 10em 0;
+  padding: 2em 0 6em 0;
 }
 
 /* =================
@@ -130,7 +128,6 @@ nav {
 footer {
   padding: 1em 2em;
   font-family: "Gilroy-Thin";
-  border-top: 1px solid black;
 }
 .contact {
   display: flex;
@@ -139,6 +136,8 @@ footer {
   gap: 1em;
 }
 
+.svg-wrapper {
+}
 #email-svg {
   width: 30px;
   height: 30px;
