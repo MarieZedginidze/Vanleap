@@ -1,5 +1,5 @@
 // Redirect users when they click van builder links
-let builderRedirects = document.getElementsByClassName("builderRedirect");
+let builderRedirects = document.getElementsByClassName("builderRedirectBtn");
 
 let retrievedVanType = localStorage.getItem("carType");
 
