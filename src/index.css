@@ -52,6 +52,7 @@ footer {
   align-items: center;
   width: 100%;
 }
+
 /* =================
    Typography 
    ================= */
@@ -81,11 +82,12 @@ strong {
   text-decoration: line-through;
   color: #cacaca;
 }
+
 /* =================
    Navbar 
    ================= */
 nav {
-  padding: 0 1em 0 6em;
+  padding: 2em 1em 0 6em;
 }
 
 .builderRedirectBtn {
@@ -136,8 +138,6 @@ footer {
   gap: 1em;
 }
 
-.svg-wrapper {
-}
 #email-svg {
   width: 30px;
   height: 30px;

@@ -1,6 +1,10 @@
 /*
   Getting Elements
 */
+// Progress Car
+let progressCar = document.querySelector("#car");
+let pin = document.querySelector("#pin");
+
 // Questions
 let questionOne = document.querySelector(".question-one");
 let questionThree = document.querySelector(".question-three");
@@ -151,7 +155,8 @@ function suggestCarSize(peopleAmount, activitiesArray, facilitiesArray) {
 let nextBtns = document.querySelectorAll(".next-buttons");
 let firstBtn = nextBtns[0];
 let secondBtn = nextBtns[1];
-let questionsChildren = document.querySelector(".questions").children;
+let questionsWrapperChildren =
+  document.querySelector(".questions-wrapper").children;
 let submitBtn = document.querySelector(".submit-button");
 
 function displaySecondQuestion(event) {
@@ -163,6 +168,7 @@ function displaySecondQuestion(event) {
     questionOne.style.display = "none";
     questionThree.style.display = "block";
     nextBtns[1].style.display = "block";
+    gsap.to(progressCar, { x: 65 });
   }
 }
 
@@ -175,6 +181,7 @@ function displayThirdQuestion(event) {
     questionThree.style.display = "none";
     questionFourth.style.display = "block";
     submitBtn.style.display = "block";
+    gsap.to(progressCar, { x: 130 });
   }
 }
 
@@ -197,6 +204,9 @@ form.addEventListener("submit", (event) => {
   if (peopleAmount && activities.length && facilities.length) {
     let car = suggestCarSize(peopleAmount, activities, facilities);
     localStorage.setItem("carType", JSON.stringify(car));
-    window.location.replace("/Van.html");
+    gsap.to(progressCar, { x: 195 });
+    setTimeout(function () {
+      location.href = "/Van.html";
+    }, 1000);
   }
 });

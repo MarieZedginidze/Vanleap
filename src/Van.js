@@ -199,16 +199,16 @@ const createModel = (path, positions) => {
 /**
  * Toggle Items Menu
  */
-let kitchenAppliances = document.getElementById("kitchen-appliances");
-let bathroomAppliances = document.getElementById("bathroom-appliances");
-let menuItems = document.querySelectorAll(".item-list");
+let kitchenAppliances = document.querySelector(".kitchen-appliances");
+let bathroomAppliances = document.querySelector(".bathroom-appliances");
+let menuButtons = document.querySelectorAll(".menu-buttons");
 
-for (const menuItem of menuItems) {
-  menuItem.addEventListener("click", toggleMenu);
+for (const menuButton of menuButtons) {
+  menuButton.addEventListener("click", toggleMenu);
 }
 
 function toggleMenu(e) {
-  if (e.target.id === "kitchen-icon") {
+  if (e.target.id === "kitchen-menu-btn") {
     if (kitchenAppliances.style.display == "block") {
       kitchenAppliances.style.display = "none";
     } else {
@@ -216,7 +216,7 @@ function toggleMenu(e) {
       bathroomAppliances.style.display = "none";
     }
   }
-  if (e.target.id === "bathroom-icon") {
+  if (e.target.id === "bathroom-menu-btn") {
     if (bathroomAppliances.style.display == "block") {
       bathroomAppliances.style.display = "none";
     } else {
@@ -271,16 +271,15 @@ function setShotrCutKey(event) {
 }
 window.addEventListener("keydown", setShotrCutKey, true);
 
-let interactionIcons = document.querySelectorAll(".interaction-icons");
-
+let interactionIcons = document.querySelectorAll(".interaction-icon-button");
 function changeTransformMode(e) {
-  if (e.target.id === "move-icon") {
+  if (e.target.id === "move-btn") {
     transformControls.mode = "translate";
   }
-  if (e.target.id === "rotate-icon") {
+  if (e.target.id === "rotate-btn") {
     transformControls.mode = "rotate";
   }
-  if (e.target.id === "scale-icon") {
+  if (e.target.id === "scale-btn") {
     transformControls.mode = "scale";
   }
 }

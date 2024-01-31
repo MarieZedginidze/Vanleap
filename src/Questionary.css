@@ -1,42 +1,106 @@
-body {
-  font-family: "Gilroy-Light";
+@font-face {
+  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_thin";
+  src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_thin.woff2");
+}
+
+@font-face {
+  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_demibold";
+  src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_demibold.woff2");
+}
+@font-face {
+  font-family: "Gilroy-Thin";
+  src: url("fonts/Gilroy-Thin.ttf");
+}
+
+* {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  background-color: royalblue;
+}
+
+body {
+  margin: 0;
+  font-family: "Gilroy-Thin", Fallback, sans-serif;
+  font-size: 1rem;
+  color: #0a0a0a;
+  line-height: 1.6;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+button {
+  display: inline-block;
+  padding: 1em 1.5em;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 1px;
+  border: 1px solid black;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 250ms;
+}
+button:hover,
+button:focus {
+  transform: scale(1.1);
+}
+
+nav,
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+}
+
+/* =================
+   Typography 
+   ================= */
+
+strong {
+  font-weight: 700;
+}
+
+/* =================
+   Navbar 
+   ================= */
+nav {
+  padding: 0 1em 2em 6em;
+}
+#logo-link {
+  padding-top: 1em;
+}
+
+.builderRedirectBtn {
+  background: #ff5400;
   color: white;
-  height: 100vh;
+}
+
+.navCTAS {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 2em;
 }
+
+/* =================
+   Form 
+   ================= */
 
 form {
-  padding: 1em;
-  background-color: #c7a5a5;
-  width: 50%;
-  height: 50%;
-}
-.tips {
-  margin-left: 1em;
-  font-size: 1.5em;
-  color: #38b000;
-}
-
-.button {
-  margin-top: 1em;
-  background-color: #00a9ff; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.result-container {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin: 0 auto;
+  border: 1px solid black;
+  max-width: 38em;
+  padding: 0 3em 0 3em;
+  background-color: #ffffff;
+}
+.question-content-space {
+  padding-bottom: 2em;
 }
 
 .required {
@@ -63,4 +127,30 @@ form {
 }
 #next-button-two {
   display: none;
+}
+
+/* Animation */
+.progress-car {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+/* =================
+   Footer 
+   ================= */
+footer {
+  padding: 4em 2em 0 2em;
+  font-family: "Gilroy-Thin";
+}
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+#email-svg {
+  width: 30px;
+  height: 30px;
 }

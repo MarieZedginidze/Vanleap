@@ -1,11 +1,15 @@
-* {
-  margin: 0;
-  padding: 0;
+@font-face {
+  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_thin";
+  src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_thin.woff2");
 }
 
-html,
-body {
-  overflow: hidden;
+@font-face {
+  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_demibold";
+  src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_demibold.woff2");
+}
+@font-face {
+  font-family: "Gilroy-Thin";
+  src: url("fonts/Gilroy-Thin.ttf");
 }
 
 .webgl {
@@ -15,32 +19,174 @@ body {
   outline: none;
 }
 
-#save-btn {
-  position: absolute;
-  top: 2%;
-  left: 25%;
-  padding: 0.5em 1em;
-}
-#reset-btn {
-  position: absolute;
-  top: 2%;
-  left: 30%;
-  padding: 0.5em 1em;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-#export-btn {
-  position: absolute;
-  top: 2%;
-  left: 35%;
-  padding: 0.5em 1em;
+html,
+body {
+  overflow: hidden;
 }
 
+body {
+  margin: 0;
+  font-family: "Gilroy-Thin", Fallback, sans-serif;
+  font-size: 1rem;
+  color: #0a0a0a;
+  line-height: 1.6;
+  text-align: center;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  border-bottom: 1px solid #0a0a0a;
+}
+
+button {
+  display: inline-block;
+  padding: 1em 1.5em;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 1px;
+  border: 1px solid black;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 250ms;
+}
+button:hover,
+button:focus {
+  transform: scale(1.1);
+}
+
+svg {
+  pointer-events: none;
+}
+
+/* =================
+   Typography 
+   ================= */
+
+strong {
+  font-weight: 700;
+}
+
+/* =================
+   Choose Items Menu
+   ================= */
+
+.choose-items-menu-container {
+  position: absolute;
+  top: 4.35em;
+  left: 0;
+}
+.models-catalogue-menu {
+  width: 100%;
+  border-right: 1px solid black;
+  height: 100vh;
+}
+
+.item-information-sidebar {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: none;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.menu-buttons {
+  font-size: 0.625rem;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  transform: none;
+  transition: none;
+  padding: 1em 1.5em 1em 1.1em;
+}
+.menu-buttons:hover,
+.menu-buttons:focus {
+  transform: none;
+}
+.menu-buttons:hover .icon-svgs {
+  transform: scale(1.2);
+}
+#help-btn {
+  border: none;
+  padding-top: 12em;
+  padding-left: 0.2em;
+}
+
+/* =================
+   Navbar 
+   ================= */
+#logo-link {
+  padding: 0.5em 1em 0 0.7em;
+}
+
+nav {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  border-bottom: 1px solid black;
+}
+.nav-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.interaction-buttons {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1em;
+}
+
+.state-buttons {
+  width: 40%;
+  padding: 0 0.5em 0 0;
+  display: flex;
+  align-self: center;
+  justify-content: flex-end;
+  gap: 1em;
+}
+
+.builderRedirectBtn {
+  background: #ff5400;
+  color: white;
+}
+
+.interaction-icon-button {
+  padding: 0.5em 1em;
+}
+.interaction-icons {
+  width: 15px;
+  height: 15px;
+}
+
+/* =================
+   Sidebar Info 
+   ================= */
 .info-sidebar {
   position: absolute;
+  top: 13%;
   margin-left: 85%;
-  width: 15%;
+  width: 20%;
   height: 100%;
-  background-color: #fff;
   display: none;
 }
 .displaySizeInfo {
@@ -62,56 +208,11 @@ ul li {
   list-style: none;
 }
 
-.models-catalogue {
-  position: absolute;
-  margin-left: 0%;
-  width: 3%;
-  height: 100%;
-  background-color: #fff;
-}
-
-.models-catalogue ul {
-  padding-top: 0.5em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-  text-decoration: none;
-}
-
-#kitchen-appliances {
-  position: absolute;
-  left: 3%;
-  width: 15%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fff;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  display: none;
-}
-#bathroom-appliances {
-  position: absolute;
-  left: 3%;
-  width: 15%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fff;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  display: none;
-}
-
-.interaction-buttons ul {
+/* .interaction-buttons ul {
   position: absolute;
   left: 50%;
   top: 1em;
   width: 20%;
   display: flex;
   gap: 2em;
-}
+} */
