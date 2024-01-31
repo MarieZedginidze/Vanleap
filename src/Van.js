@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { TransformControls } from "three/addons/controls/TransformControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -90,7 +91,10 @@ scene.add(transformControls);
 /**
  *  Models
  */
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath("/draco/");
 const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
 
 let van;
 
@@ -160,27 +164,106 @@ function passingPositions() {
 /**
  * Create Models UI
  */
-// Load and Pass a Cupboard Model
-const cupboardPath = "/models/cupboard.glb";
-let cupboard = document.querySelector(".cupboard");
+// Load and Pass a Cabinet Model
+const cupboardPath = "/models/cabinet.glb";
+let cupboard = document.querySelector(".cabinet");
 
 cupboard.addEventListener("click", () => {
   createModel(cupboardPath, passingPositions());
 });
 
+// Load and Pass a Cabinet with Basin Model
+const CabinetWithBasinPath = "/models/cabinetWithBasin.glb";
+let CabinetWithBasin = document.querySelector(".cabinet-with-basin");
+
+CabinetWithBasin.addEventListener("click", () => {
+  createModel(CabinetWithBasinPath, passingPositions());
+});
+
+// Load and Pass a Drawers Model
+const drawersPath = "/models/drawers.glb";
+let drawers = document.querySelector(".drawers");
+drawers.addEventListener("click", () => {
+  createModel(drawersPath, passingPositions());
+});
+
+// Load and Pass a glass Door Cabinet Model
+const glassDoorCabinetPath = "/models/glassDoorCabinet.glb";
+let glassDoorCabinet = document.querySelector(".glassDoorCabinet");
+glassDoorCabinet.addEventListener("click", () => {
+  createModel(glassDoorCabinetPath, passingPositions());
+});
+
+// Load and Pass a smaller Upper Cabinet Model
+const smallerUpperCabinetPath = "/models/smallerUpperCabinet.glb";
+let smallerUpperCabinet = document.querySelector(".smallerUpperCabinet");
+smallerUpperCabinet.addEventListener("click", () => {
+  createModel(smallerUpperCabinetPath, passingPositions());
+});
+
+// Load and Pass a smaller hanged Toilet Model
+const hangedToiletPath = "/models/hangedToilet.glb";
+let hangedToilet = document.querySelector(".hangedToilet");
+hangedToilet.addEventListener("click", () => {
+  createModel(hangedToiletPath, passingPositions());
+});
+
+// Load and Pass a smaller Shower Model
+const showerPath = "/models/shower.glb";
+let shower = document.querySelector(".shower");
+shower.addEventListener("click", () => {
+  createModel(showerPath, passingPositions());
+});
+
+// Load and Pass a toilet Model
+const toiletPath = "/models/toilet.glb";
+let toilet = document.querySelector(".toilet");
+toilet.addEventListener("click", () => {
+  createModel(toiletPath, passingPositions());
+});
+
+// Load and Pass a bed Model
+const bedPath = "/models/bed.glb";
+let bed = document.querySelector(".bed");
+bed.addEventListener("click", () => {
+  createModel(bedPath, passingPositions());
+});
+// Load and Pass a Mattress Model
+const mattressPath = "/models/mattress.glb";
+let mattress = document.querySelector(".mattress");
+mattress.addEventListener("click", () => {
+  createModel(mattressPath, passingPositions());
+});
+
+// Load and Pass a Chest Freeser Model
+const chestFreezerPath = "/models/chestFreezer.glb";
+let chestFreezer = document.querySelector(".chestFreezer");
+chestFreezer.addEventListener("click", () => {
+  createModel(chestFreezerPath, passingPositions());
+});
+// Load and Pass a Fridge Model
+const fridgePath = "/models/fridge.glb";
+let fridge = document.querySelector(".fridge");
+fridge.addEventListener("click", () => {
+  createModel(fridgePath, passingPositions());
+});
+// Load and Pass a Cooker Model
+const cookerPath = "/models/cooker.glb";
+let cooker = document.querySelector(".cooker");
+cooker.addEventListener("click", () => {
+  createModel(cookerPath, passingPositions());
+});
+// Load and Pass a Cube Model
+const cubePath = "/models/cube.glb";
+let cube = document.querySelector(".cube");
+cube.addEventListener("click", () => {
+  createModel(cubePath, passingPositions());
+});
 // Load and Pass a Sphere Model
 const spherePath = "/models/sphere.glb";
 let sphere = document.querySelector(".sphere");
-
 sphere.addEventListener("click", () => {
   createModel(spherePath, passingPositions());
-});
-
-// Load and Pass a Sphere Model
-const bathSpherePath = "/models/sphere.glb";
-let bathSphere = document.querySelector(".bathSphere");
-bathSphere.addEventListener("click", () => {
-  createModel(bathSpherePath, passingPositions());
 });
 
 let models = [];
@@ -201,6 +284,9 @@ const createModel = (path, positions) => {
  */
 let kitchenAppliances = document.querySelector(".kitchen-appliances");
 let bathroomAppliances = document.querySelector(".bathroom-appliances");
+let furniture = document.querySelector(".furniture");
+let kitchenItems = document.querySelector(".kitchen-items");
+let shapes = document.querySelector(".shapes");
 let menuButtons = document.querySelectorAll(".menu-buttons");
 
 for (const menuButton of menuButtons) {
@@ -214,6 +300,8 @@ function toggleMenu(e) {
     } else {
       kitchenAppliances.style.display = "block";
       bathroomAppliances.style.display = "none";
+      furniture.style.display = "none";
+      kitchenItems.style.display = "none";
     }
   }
   if (e.target.id === "bathroom-menu-btn") {
@@ -222,6 +310,42 @@ function toggleMenu(e) {
     } else {
       bathroomAppliances.style.display = "block";
       kitchenAppliances.style.display = "none";
+      furniture.style.display = "none";
+      kitchenItems.style.display = "none";
+      shapes.style.display = "none";
+    }
+  }
+  if (e.target.id === "furniture-menu-btn") {
+    if (furniture.style.display == "block") {
+      furniture.style.display = "none";
+    } else {
+      furniture.style.display = "block";
+      kitchenAppliances.style.display = "none";
+      bathroomAppliances.style.display = "none";
+      kitchenItems.style.display = "none";
+      shapes.style.display = "none";
+    }
+  }
+  if (e.target.id === "kitchen-items-menu-btn") {
+    if (kitchenItems.style.display == "block") {
+      kitchenItems.style.display = "none";
+    } else {
+      kitchenItems.style.display = "block";
+      kitchenAppliances.style.display = "none";
+      bathroomAppliances.style.display = "none";
+      furniture.style.display = "none";
+      shapes.style.display = "none";
+    }
+  }
+  if (e.target.id === "shape-menu-btn") {
+    if (shapes.style.display == "block") {
+      shapes.style.display = "none";
+    } else {
+      shapes.style.display = "block";
+      kitchenAppliances.style.display = "none";
+      bathroomAppliances.style.display = "none";
+      furniture.style.display = "none";
+      kitchenItems.style.display = "none";
     }
   }
 }
@@ -297,18 +421,73 @@ let widthInfo = document.getElementById("info-width");
 let infoSidebar = document.querySelector(".info-sidebar");
 
 function displaySidebar(modelName) {
-  if (modelName === "Cube") {
+  console.log(modelName);
+  if (modelName === "cabinet_1") {
     document.getElementById("model-image").src =
-      "https://www.aberdeens.co.za/images/cmsimages/big/product_267_2DoorFloorKitchenCupboard(PineTop)ClearPine(1).jpg";
+      "https://www.sweethome3d.com/models/contributions/cabinet.png";
 
     document.querySelector(".info-sidebar").style.display = "block";
   }
-  if (modelName === "Sphere") {
+  if (modelName === "cabinetWithBasin_1") {
     document.getElementById("model-image").src =
-      "https://www.splashlearn.com/math-vocabulary/wp-content/uploads/2022/04/sphere1.png";
+      "https://www.sweethome3d.com/models/contributions/cabinetWithBasin.png";
   }
+  if (modelName === "drawers_1") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/contributions/drawers.png";
+  }
+  if (modelName === "glassDoorCabinet") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/contributions/glassdoorCabinet.png";
+  }
+  if (modelName === "smallerUpperCabinet_1") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/contributions/upperCabinet2.png";
+  }
+  if (modelName === "hangedToilet_1") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/contributions/toilet_hang_round.png";
+  }
+  if (modelName === "shower_1") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/shower.png";
+  }
+  if (modelName === "toilet_1") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/lucapresidente/water.png";
+  }
+  if (modelName === "bed_2_1" || modelName === "bed_2_3") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/bed.png";
+  }
+  if (modelName === "mattress") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/scopia/air-mattress.png";
+  }
+  if (modelName === "chest-freezer_1") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/scopia/chest-freezer.png";
+  }
+  if (modelName === "fridge_2" || modelName === "fridge_1") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/fridge.png";
+  }
+  if (modelName === "cooker001") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/cooker.png";
+  }
+  if (modelName === "cube") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/box.png";
+  }
+  if (modelName === "sphere") {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/contributions/sphere.png";
+  }
+
   infoSidebar.style.display = "block";
 }
+
 // Close the Info Sidebar
 let closeBtn = document.getElementById("close-btn");
 closeBtn.addEventListener("click", () => {
@@ -321,10 +500,10 @@ let modelFromIntersection;
 function toggleDeleteBtn(model) {
   if (model) {
     // If there is an intersecting model, enable the button
-    deleteBtn.disabled = false;
+    deleteBtn.classList.remove("disabled");
   } else {
     // If there is no intersecting model, disable the button
-    deleteBtn.disabled = true;
+    deleteBtn.classList.add("disabled");
   }
   modelFromIntersection = model;
 }
@@ -332,11 +511,11 @@ function toggleDeleteBtn(model) {
 /**
  * Delete the Model
  */
+
 let deleteBtn = document.getElementById("delete-btn");
 function deleteModel() {
   if (modelFromIntersection) {
-    modelFromIntersection.removeFromParent(scene);
-
+    modelFromIntersection.parent.removeFromParent(scene);
     // remove model from the scene
     transformControls.detach();
     // Hide info Sidebar
