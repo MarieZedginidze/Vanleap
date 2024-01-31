@@ -155,9 +155,9 @@ if (retrievedVanType === "Mercedes Benz") {
 
 // Generating and Passing Coordinates for Models
 function passingPositions() {
-  let x = 1.5;
-  let y = 1.2;
-  let z = 1;
+  let x = -0.5;
+  let y = 0.9;
+  let z = 0;
   return { x, y, z };
 }
 
@@ -444,23 +444,27 @@ function displaySidebar(modelName) {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/contributions/upperCabinet2.png";
   }
-  if (modelName === "hangedToilet_1") {
+  if (modelName === "toilet_hang_round_1") {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/contributions/toilet_hang_round.png";
   }
-  if (modelName === "shower_1") {
+  if (modelName === "shower004") {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/shower.png";
   }
-  if (modelName === "toilet_1") {
+  if (modelName === "water") {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/lucapresidente/water.png";
   }
-  if (modelName === "bed_2_1" || modelName === "bed_2_3") {
+  if (
+    modelName === "bed_2_1" ||
+    modelName === "bed_2_3" ||
+    modelName === "bed_1"
+  ) {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/bed.png";
   }
-  if (modelName === "mattress") {
+  if (modelName === "Cube002") {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/scopia/air-mattress.png";
   }
@@ -476,11 +480,11 @@ function displaySidebar(modelName) {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/cooker.png";
   }
-  if (modelName === "cube") {
+  if (modelName === "Cube") {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/box.png";
   }
-  if (modelName === "sphere") {
+  if (modelName === "Sphere") {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/contributions/sphere.png";
   }
@@ -533,11 +537,14 @@ function displayModelSizes() {
     modelBoundingBox = new THREE.Box3().setFromObject(modelFromIntersection);
     modelSize = modelBoundingBox.getSize(new THREE.Vector3());
     lengthInfo.textContent =
-      "length: " + Math.round((modelSize.x + Number.EPSILON) * 100) / 100;
+      "Length in meters: " +
+      Math.round((modelSize.x + Number.EPSILON) * 100) / 100;
     heightInfo.textContent =
-      "height: " + Math.round((modelSize.y + Number.EPSILON) * 100) / 100;
+      "Height in meters: " +
+      Math.round((modelSize.y + Number.EPSILON) * 100) / 100;
     widthInfo.textContent =
-      "width: " + Math.round((modelSize.z + Number.EPSILON) * 100) / 100;
+      "Width in meters: " +
+      Math.round((modelSize.z + Number.EPSILON) * 100) / 100;
   }
 }
 

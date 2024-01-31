@@ -114,7 +114,8 @@ nav {
    instructional-GIF 
    ================= */
 .instructional-images {
-  max-width: 75vw;
+  width: 60%;
+  height: 60%;
 }
 
 /* =================

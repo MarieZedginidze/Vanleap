@@ -36,7 +36,6 @@ body {
   font-size: 1rem;
   color: #0a0a0a;
   line-height: 1.6;
-  text-align: center;
 }
 
 ul {
@@ -46,6 +45,7 @@ ul {
 
 li {
   border-bottom: 1px solid #0a0a0a;
+  list-style: none;
 }
 a {
   color: #000;
@@ -94,6 +94,7 @@ strong {
   left: 0;
   display: flex;
   height: 100vh;
+  background-color: white;
 }
 
 .models-catalogue-menu {
@@ -200,27 +201,26 @@ nav {
    ================= */
 .info-sidebar {
   position: absolute;
-  top: 13%;
-  margin-left: 85%;
-  width: 20%;
-  height: 100%;
+  top: 4.35em;
+  right: 0;
+  height: 90vh;
   display: none;
-}
-.displaySizeInfo {
-  display: flex;
-  flex-direction: column;
-}
-.display-sizes {
-  width: 50%;
-}
-img {
-  width: 150px;
-  height: 150px;
-}
-#close-btn {
-  margin-left: 11.7em;
+  padding: 0.5em 0.5em 0 0;
+  border-top: none;
+  border-left: #000 1px solid;
+  border-right: #000 1px solid;
+  border-bottom: #000 1px solid;
+  background-color: white;
 }
 
-ul li {
-  list-style: none;
+.info-sidebar-main {
+  padding: 2em;
+}
+
+.info-sidebar-buttons {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 1em;
 }
