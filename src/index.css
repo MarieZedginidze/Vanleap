@@ -1,17 +1,3 @@
-@font-face {
-  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_thin";
-  src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_thin.woff2");
-}
-
-@font-face {
-  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_demibold";
-  src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_demibold.woff2");
-}
-@font-face {
-  font-family: "Gilroy-Thin";
-  src: url("fonts/Gilroy-Thin.ttf");
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -20,11 +6,16 @@
 
 body {
   margin: 0;
-  font-family: "Gilroy-Thin", Fallback, sans-serif;
+  font-family: "Kumbh Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  font-variation-settings: "YOPQ" 300;
   font-size: 1rem;
-  color: #0a0a0a;
+  color: #140f00;
   line-height: 1.6;
   text-align: center;
+  cursor: url("./car.svg") 16 16, pointer;
 }
 
 button {
@@ -34,7 +25,7 @@ button {
   text-transform: uppercase;
   font-weight: 900;
   letter-spacing: 1px;
-  border: 1px solid black;
+  border: 1px solid #140f00;
   cursor: pointer;
   transform: scale(1);
   transition: transform 250ms;
@@ -43,10 +34,12 @@ button:hover,
 button:focus {
   transform: scale(1.1);
 }
-
+a {
+  text-decoration: none;
+  color: #140f00;
+}
 nav,
 footer {
-  position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -62,6 +55,7 @@ strong {
 }
 
 .hero-title {
+  font-family: "Prompt", sans-serif;
   font-size: 3rem;
   line-height: 1.4;
   margin-bottom: 0;
@@ -75,19 +69,37 @@ strong {
   font-weight: 100;
 }
 .hero-title-highlight {
-  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_demibold";
-  color: #ffd400;
+  font-weight: bold;
+  color: #ffbd00;
 }
 .hero-title-strikethrough {
-  text-decoration: line-through;
-  color: #cacaca;
+  position: relative;
+}
+.hero-title-strikethrough:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 50%;
+  right: 0;
+  border-top: 6px #140f00 solid;
+  border-color: inherit;
+
+  -webkit-transform: rotate(-15deg);
+  -moz-transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  -o-transform: rotate(-15deg);
+  transform: rotate(-15deg);
 }
 
 /* =================
    Navbar 
    ================= */
+.smaller-device-logo {
+  display: none;
+}
 nav {
-  padding: 2em 1em 0 6em;
+  min-height: 10vh;
+  padding: 2em 2em 0 6em;
 }
 
 .builderRedirectBtn {
@@ -99,7 +111,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2em;
+  gap: 1em;
 }
 
 /* =================
@@ -107,39 +119,210 @@ nav {
    ================= */
 
 .hero {
-  padding: 12em 0 3em 0;
+  display: flex;
+  position: relative;
+  min-height: 50vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
 }
 
 /* =================
    instructional-GIF 
    ================= */
+
 .instructional-images {
-  width: 60%;
-  height: 60%;
+  min-width: 60vw;
+  min-height: 60vh;
+  padding-top: 4em;
 }
 
 /* =================
    second CTA Section 
    ================= */
 .secondCTASection {
-  padding: 2em 0 6em 0;
+  padding: 2em 0 0 0;
 }
 
 /* =================
    Footer 
    ================= */
 footer {
-  padding: 1em 2em;
-  font-family: "Gilroy-Thin";
+  min-height: 25vh;
+  padding: 4em 2em 0 2em;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Kumbh Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 0.9em;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings: "YOPQ" 300;
 }
 .contact {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1em;
+  gap: 0.5em;
 }
 
 #email-svg {
-  width: 30px;
-  height: 30px;
+  padding-top: 0.38em;
+  fill: #140f00;
+}
+#email-svg:hover,
+#email-svg:focus {
+  transform: scale(1.2);
+}
+
+/* =================
+   media queries 
+   ================= */
+
+@media (min-width: 1024px) {
+  .device-warning {
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
+  .device-warning {
+    width: 100%;
+    min-height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    background-color: #efefef;
+    font-size: 1.1em;
+    color: #140f00;
+  }
+}
+@media (max-width: 900px) {
+  nav {
+    padding: 2em 2em 0 2em;
+  }
+}
+
+@media (max-width: 700px) {
+  .device-warning {
+    font-size: 1em;
+  }
+  .hero {
+    min-height: 42vh;
+  }
+
+  .hero-title {
+    font-size: 2.5em;
+  }
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+  .instructional-images {
+    max-width: 90vw;
+  }
+  footer {
+    padding: 4em 1em 0 1em;
+  }
+}
+
+@media (max-width: 600px) {
+  .order-change-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  nav {
+    order: 1;
+    justify-content: center;
+  }
+  .hero {
+    order: 0;
+    min-height: 30vh;
+  }
+  #logo-link {
+    display: none;
+  }
+  .smaller-device-logo {
+    display: block;
+    display: flex;
+    min-height: 25vh;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding: 0 1em 0 1em;
+  }
+  .hero-title {
+    font-size: 2.3em;
+  }
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  .instructional-images {
+    max-width: 90vw;
+    min-height: 40vh;
+  }
+  footer {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 1em;
+  }
+}
+@media (max-width: 520px) {
+  .hero-title {
+    font-size: 2.2em;
+  }
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  .instructional-images {
+    max-width: 90vw;
+    min-height: 40vh;
+  }
+}
+
+@media (max-width: 500px) {
+  .hero {
+    padding: 0 1.2em 0 1.2em;
+  }
+  .hero-title {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 450px) {
+  .hero-title {
+    font-size: 2em;
+  }
+  .hero {
+    min-height: 25vh;
+  }
+
+  .device-warning {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: 1.7em;
+  }
+  .hero-subtitle {
+    font-size: 1em;
+  }
+  .device-warning {
+    font-size: 0.8em;
+  }
+  .instructional-images {
+    min-height: 20vh;
+  }
+  .device-warning {
+    font-size: 0.7em;
+  }
+  nav {
+    padding: 0.5em;
+  }
 }

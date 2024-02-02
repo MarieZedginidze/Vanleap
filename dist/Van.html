@@ -6,9 +6,9 @@
 
     <title>Van Builder</title>
     
-    <script type="module" crossorigin src="./assets/vanBuilder-b3d705be.js"></script>
+    <script type="module" crossorigin src="./assets/vanBuilder-f36a6ba6.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-3cfb730f.js">
-    <link rel="stylesheet" href="./assets/Van-8bd6bad5.css">
+    <link rel="stylesheet" href="./assets/Van-93265aed.css">
   </head>
   <body>
     <canvas class="webgl"> </canvas>
@@ -479,22 +479,19 @@
     </section>
 
     <sidebar class="info-sidebar">
-      <header class="info-sidebar-header">
-        <section class="close">
-          <button id="close-btn">close</button>
-        </section>
+      <main class="info-sidebar-main">
         <section class="image">
           <img id="model-image" src="" alt="" />
         </section>
-      </header>
-
-      <section class="displaySizeInfo">
-        <section class="display-sizes" id="info-length" type="text"></section>
-        <section class="display-sizes" id="info-height" type="text"></section>
-        <section class="display-sizes" id="info-width" type="text"></section>
-      </section>
-      <section class="info-sidebar-remove">
+        <section class="displaySizeInfo">
+          <section class="display-sizes" id="info-length" type="text"></section>
+          <section class="display-sizes" id="info-height" type="text"></section>
+          <section class="display-sizes" id="info-width" type="text"></section>
+        </section>
+      </main>
+      <section class="info-sidebar-buttons">
         <button id="delete-btn">delete</button>
+        <button id="close-btn">close</button>
       </section>
     </sidebar>
     <script
