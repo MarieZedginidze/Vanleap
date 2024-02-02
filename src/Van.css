@@ -93,7 +93,7 @@ strong {
   top: 4.35em;
   left: 0;
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   background-color: white;
 }
 
@@ -105,16 +105,15 @@ strong {
 }
 .help {
   display: flex;
-  flex: 0.75;
   justify-content: flex-end;
   align-items: flex-end;
+  min-height: 35vh;
 }
 
 .appliances-furniture {
   display: flex;
   width: 100%;
-  flex: 1;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .item-information-sidebar {
@@ -223,4 +222,135 @@ nav {
   align-items: flex-end;
   justify-content: flex-end;
   gap: 1em;
+}
+
+/* =================
+   media queries 
+   ================= */
+
+@media (min-width: 1024px) {
+  .device-warning {
+    display: none;
+  }
+}
+
+@media (max-height: 600px) {
+  .help {
+    min-height: 34vh;
+  }
+}
+@media (max-height: 560px) {
+  .help {
+    min-height: 32vh;
+  }
+}
+@media (max-height: 546px) {
+  .help {
+    min-height: 30vh;
+  }
+}
+@media (max-height: 530px) {
+  .help {
+    min-height: 28vh;
+  }
+}
+@media (max-height: 520px) {
+  .help {
+    min-height: 26vh;
+  }
+}
+@media (max-height: 500px) {
+  .help {
+    min-height: 24vh;
+  }
+}
+@media (max-height: 485px) {
+  .help {
+    min-height: 22vh;
+  }
+}
+
+@media (max-height: 470px) {
+  nav {
+    align-items: center;
+    justify-content: center;
+    border: none;
+    min-height: 10vh;
+    padding: 1em;
+  }
+  #logo-link {
+    display: block;
+    border: 1px #140f00 solid;
+  }
+  .nav-buttons {
+    display: none;
+  }
+  .choose-items-menu-container {
+    display: none;
+  }
+  .device-warning {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 8vh;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    background-color: #efefef;
+    font-size: 1.1em;
+    color: #140f00;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav-buttons {
+    display: none;
+  }
+  nav {
+    align-items: center;
+    justify-content: center;
+    border: none;
+    min-height: 10vh;
+    padding: 1em;
+  }
+  #logo-link {
+    display: block;
+    border: 1px #140f00 solid;
+  }
+  .choose-items-menu-container {
+    display: none;
+  }
+  .device-warning {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 8vh;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    background-color: #efefef;
+    font-size: 1.1em;
+    color: #140f00;
+  }
+}
+
+@media (max-width: 700px) {
+  .device-warning {
+    font-size: 1em;
+  }
+}
+@media (max-width: 450px) {
+  .device-warning {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 390px) {
+  .device-warning {
+    font-size: 0.7em;
+  }
 }

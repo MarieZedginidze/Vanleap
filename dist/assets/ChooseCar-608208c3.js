@@ -1,2 +1,2 @@
 import"./modulepreload-polyfill-3cfb730f.js";let t=document.getElementById("l2h2"),n=document.getElementById("l3h3"),e;t.addEventListener("click",()=>{e="Ford Transit",localStorage.setItem("carType",JSON.stringify(e)),window.location.replace("/Van.html")});n.addEventListener("click",()=>{e="Mercedes Benz",localStorage.setItem("carType",JSON.stringify(e)),window.location.replace("/Van.html")});
-//# sourceMappingURL=ChooseCar-c302323a.js.map
+//# sourceMappingURL=ChooseCar-608208c3.js.map
