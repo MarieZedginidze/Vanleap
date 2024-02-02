@@ -1,17 +1,3 @@
-@font-face {
-  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_thin";
-  src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_thin.woff2");
-}
-
-@font-face {
-  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_demibold";
-  src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_demibold.woff2");
-}
-@font-face {
-  font-family: "Gilroy-Thin";
-  src: url("fonts/Gilroy-Thin.ttf");
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -20,9 +6,10 @@
 
 body {
   margin: 0;
-  font-family: "Gilroy-Thin", Fallback, sans-serif;
+  font-family: "Prompt", sans-serif;
+  font-weight: 100;
   font-size: 1rem;
-  color: #0a0a0a;
+  color: #140f00;
   line-height: 1.6;
   display: flex;
   min-height: 100vh;
@@ -36,7 +23,7 @@ button {
   text-transform: uppercase;
   font-weight: 900;
   letter-spacing: 1px;
-  border: 1px solid black;
+  border: 1px solid #140f00;
   cursor: pointer;
   transform: scale(1);
   transition: transform 250ms;
@@ -45,13 +32,17 @@ button:hover,
 button:focus {
   transform: scale(1.1);
 }
-
+a {
+  text-decoration: none;
+  color: #140f00;
+}
 nav,
 footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
+  width: 100%;
+  text-align: center;
 }
 
 /* =================
@@ -66,7 +57,7 @@ strong {
    Navbar 
    ================= */
 nav {
-  padding: 0 1em 2em 6em;
+  padding: 0 2em 2em 6em;
 }
 #logo-link {
   padding-top: 1em;
@@ -87,16 +78,19 @@ nav {
 /* =================
    Form 
    ================= */
-
+.questions-wrapper {
+  display: flex;
+  flex-direction: column;
+}
 form {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
   margin: 0 auto;
-  border: 1px solid black;
-  max-width: 38em;
-  padding: 0 3em 0 3em;
+  border: 1px solid #140f00;
+  min-width: 38em;
+  min-height: 55vh;
+  padding: 1em;
   background-color: #ffffff;
 }
 .question-content-space {
@@ -109,12 +103,12 @@ form {
 .required::after {
   content: " *";
   font-size: 1.5em;
-  color: red;
+  color: #ff2a2a;
 }
 
 .chk_option_error {
-  visibility: hidden;
-  color: red;
+  display: none;
+  color: #ff2a2a;
 }
 .question-three {
   display: none;
@@ -140,17 +134,98 @@ form {
    Footer 
    ================= */
 footer {
+  min-height: 25vh;
   padding: 4em 2em 0 2em;
-  font-family: "Gilroy-Thin";
+  display: flex;
+  justify-content: space-between;
+  font-family: "Kumbh Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 0.9em;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings: "YOPQ" 300;
 }
 .contact {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1em;
+  gap: 0.5em;
 }
 
 #email-svg {
-  width: 30px;
-  height: 30px;
+  padding-top: 0.38em;
+  fill: #140f00;
+}
+#email-svg:hover,
+#email-svg:focus {
+  transform: scale(1.2);
+}
+
+/* =================
+   media queries 
+   ================= */
+
+@media (max-width: 900px) {
+  nav {
+    padding: 0 2em 2em 2em;
+  }
+}
+@media (max-width: 900px) {
+  form {
+    min-width: 33em;
+  }
+  nav {
+    padding: 0 2em 2em 2em;
+  }
+}
+@media (max-width: 650px) {
+  form {
+    min-width: 30em;
+    padding: 2em;
+  }
+}
+@media (max-width: 600px) {
+  form {
+    max-width: 25em;
+  }
+}
+
+@media (max-width: 560px) {
+  form {
+    min-width: 10em;
+    border: none;
+  }
+  footer {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 1em;
+    padding-top: 0;
+  }
+  .progress-car {
+    order: 0;
+  }
+  .question-one {
+    padding-top: 2em;
+    order: 1;
+  }
+  .question-three {
+    padding-top: 2em;
+    order: 1;
+  }
+  .question-four {
+    padding-top: 2em;
+    order: 1;
+  }
+  nav {
+    padding: 0 1em 2em 1em;
+  }
+}
+
+@media (max-width: 500px) {
+  form {
+    padding: 1.5em;
+  }
+  footer {
+    padding: 0;
+  }
 }

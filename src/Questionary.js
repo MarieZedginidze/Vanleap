@@ -47,7 +47,7 @@ function showError(option_name) {
     // Select the Error Message Section in a specific Form Section
     let specificErrorSection = parentElement.querySelector(".chk_option_error");
     // Display Error Message Section
-    specificErrorSection.style.visibility = "visible";
+    specificErrorSection.style.display = "block";
   }
 }
 
@@ -55,7 +55,7 @@ function showError(option_name) {
 function hideError(parent) {
   let parentElement = document.querySelector("." + parent);
   let specificErrorSection = parentElement.querySelector(".chk_option_error");
-  specificErrorSection.style.visibility = "hidden";
+  specificErrorSection.style.display = "block";
 }
 /*
     First Question: People Amount
