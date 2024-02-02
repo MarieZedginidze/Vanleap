@@ -2,13 +2,39 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { TransformControls } from "three/addons/controls/TransformControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import { gsap } from "gsap";
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
 
 // Scene
 let scene = new THREE.Scene();
+
+/**
+ * Overlay
+ */
+const overlayGeometry = new THREE.PlaneGeometry(2, 1.55, 1, 1);
+const overlayMaterial = new THREE.ShaderMaterial({
+  transparent: true,
+  vertexShader: `
+      void main()
+      {
+          gl_Position = vec4(position, 1.0);
+      }
+  `,
+  fragmentShader: `
+  uniform float uAlpha;
+      void main()
+      {
+        gl_FragColor = vec4(1.0, 1.0, 1.0, uAlpha);
+      }
+  `,
+  uniforms: {
+    uAlpha: { value: 1 },
+  },
+});
+const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial);
+scene.add(overlay);
 
 /**
  * Lights
@@ -91,10 +117,28 @@ scene.add(transformControls);
 /**
  *  Models
  */
-const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("/draco/");
-const gltfLoader = new GLTFLoader();
-gltfLoader.setDRACOLoader(dracoLoader);
+let loadingTextSection = document.querySelector(".loading-text");
+let retrieviedVanSize = JSON.parse(localStorage.getItem("carType"));
+if (retrieviedVanSize === "Ford Transit") {
+  loadingTextSection.textContent = "Mercedes Benz L2H2";
+}
+const loadingManager = new THREE.LoadingManager(
+  // Loaded
+  () => {
+    gsap.to(overlayMaterial.uniforms.uAlpha, {
+      duration: 3,
+      value: 0,
+      delay: 1,
+    });
+
+    loadingTextSection.classList.add("ended");
+  },
+
+  // Progress
+  () => {}
+);
+
+const gltfLoader = new GLTFLoader(loadingManager);
 
 let van;
 

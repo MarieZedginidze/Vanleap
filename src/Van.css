@@ -18,7 +18,20 @@
   left: 0;
   outline: none;
 }
-
+.loading-text {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 40%;
+  width: 100%;
+  font-size: 5em;
+}
+.loading-text.ended {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -156,6 +169,7 @@ strong {
 nav {
   width: 100%;
   position: absolute;
+  background-color: ffffff;
   display: flex;
   border-bottom: 1px solid black;
 }
