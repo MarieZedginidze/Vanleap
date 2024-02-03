@@ -332,7 +332,7 @@ if (retrievedVanType === "Mercedes Benz") {
     sidePlane.visible = false;
     topPlane.visible = false;
     frontPlane.visible = false;
-    scene.position.set(0, 0, 0);
+    scene.position.set(0, -0.3, 0);
     scene.add(van);
   });
 }
@@ -699,8 +699,8 @@ function restrictingMovement() {
         model.position.y = floorPlane.position.y + modelSize.y / 2;
       }
       // restricting movement on the y axis with floor plane
-      if (modelBoundingBox.max.z > frontPlanebbox.max.z + 3) {
-        model.position.z = frontPlane.position.z - modelSize.z / 2;
+      if (modelBoundingBox.min.z > -frontPlanebbox.min.z + modelSize.z * 2.8) {
+        model.position.z = frontPlane.position.z;
       }
     }
   }
