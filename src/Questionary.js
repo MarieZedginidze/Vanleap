@@ -46,6 +46,7 @@ function showError(option_name) {
     let parentElement = childElement.parentNode;
     // Select the Error Message Section in a specific Form Section
     let specificErrorSection = parentElement.querySelector(".chk_option_error");
+
     // Display Error Message Section
     specificErrorSection.style.display = "block";
   }
@@ -55,7 +56,7 @@ function showError(option_name) {
 function hideError(parent) {
   let parentElement = document.querySelector("." + parent);
   let specificErrorSection = parentElement.querySelector(".chk_option_error");
-  specificErrorSection.style.display = "block";
+  specificErrorSection.style.display = "none";
 }
 /*
     First Question: People Amount
@@ -155,6 +156,7 @@ function suggestCarSize(peopleAmount, activitiesArray, facilitiesArray) {
 let nextBtns = document.querySelectorAll(".next-buttons");
 let firstBtn = nextBtns[0];
 let secondBtn = nextBtns[1];
+
 let questionsWrapperChildren =
   document.querySelector(".questions-wrapper").children;
 let submitBtn = document.querySelector(".submit-button");
@@ -207,6 +209,6 @@ form.addEventListener("submit", (event) => {
     gsap.to(progressCar, { x: 195 });
     setTimeout(function () {
       location.href = "/Van.html";
-    }, 1000);
+    }, 800);
   }
 });
