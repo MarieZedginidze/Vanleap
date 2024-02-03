@@ -114,13 +114,16 @@ controls.maxPolarAngle = 1.3; // radians
 const transformControls = new TransformControls(camera, renderer.domElement);
 transformControls.setSize(0.8, 0.8, 0.8);
 scene.add(transformControls);
+
 /**
- *  Models
+ *  Loader
  */
 let loadingTextSection = document.querySelector(".loading-text");
 let retrieviedVanSize = JSON.parse(localStorage.getItem("carType"));
 if (retrieviedVanSize === "Ford Transit") {
   loadingTextSection.textContent = "Mercedes Benz L2H2";
+} else {
+  loadingTextSection.textContent = "Mercedes Benz L3H3";
 }
 const loadingManager = new THREE.LoadingManager(
   // Loaded
@@ -139,63 +142,6 @@ const loadingManager = new THREE.LoadingManager(
 );
 
 const gltfLoader = new GLTFLoader(loadingManager);
-
-let van;
-
-// let backPlane;
-// let floorPlane;
-// let truckPlane;
-// let sidePlane;
-// let topPlane;
-
-// let backPlanebbox;
-// let floorPlanebbox;
-// let truckPlanebbox;
-// let sidePlanebbox;
-// let topPlanebbox;
-let vanType;
-// Load a van
-// Load Van Depending on the Questionary Results
-let retrievedVanType = JSON.parse(localStorage.getItem("carType"));
-if (retrievedVanType === "Ford Transit") {
-  vanType = "Ford Transit";
-  gltfLoader.load("/models/l2h2.glb", (gltf) => {
-    van = gltf.scene;
-
-    // backPlane = van.getObjectByName("backPlane");
-    // floorPlane = van.getObjectByName("floorPlane");
-    // truckPlane = van.getObjectByName("truckPlane");
-    // sidePlane = van.getObjectByName("sidePlane");
-    // topPlane = van.getObjectByName("topPlane");
-
-    // backPlane.visible = false;
-    // floorPlane.visible = false;
-    // truckPlane.visible = false;
-    // sidePlane.visible = false;
-    // topPlane.visible = false;
-    scene.position.set(0, -0.3, 0);
-    scene.add(van);
-  });
-}
-if (retrievedVanType === "Mercedes Benz") {
-  gltfLoader.load("/models/l3h3.glb", (gltf) => {
-    vanType = "Mercedes Benz";
-    van = gltf.scene;
-    // backPlane = van.getObjectByName("backPlane");
-    // floorPlane = van.getObjectByName("floorPlane");
-    // truckPlane = van.getObjectByName("truckPlane");
-    // sidePlane = van.getObjectByName("sidePlane");
-    // topPlane = van.getObjectByName("topPlane");
-
-    // backPlane.visible = false;
-    // floorPlane.visible = false;
-    // truckPlane.visible = false;
-    // sidePlane.visible = false;
-    // topPlane.visible = false;
-    scene.position.set(0, 0, 0);
-    scene.add(van);
-  });
-}
 
 // Generating and Passing Coordinates for Models
 function passingPositions() {
@@ -324,6 +270,74 @@ const createModel = (path, positions) => {
 };
 
 /**
+ *  Vans
+ */
+
+let van;
+
+let backPlane;
+let floorPlane;
+let truckPlane;
+let sidePlane;
+let topPlane;
+let frontPlane;
+
+let backPlanebbox;
+let floorPlanebbox;
+let truckPlanebbox;
+let sidePlanebbox;
+let topPlanebbox;
+let frontPlanebbox;
+
+// Load Van Depending on the Questionary Results
+let vanType;
+
+let retrievedVanType = JSON.parse(localStorage.getItem("carType"));
+if (retrievedVanType === "Ford Transit") {
+  vanType = "Ford Transit";
+  gltfLoader.load("/models/l2h2.glb", (gltf) => {
+    van = gltf.scene;
+
+    backPlane = van.getObjectByName("backPlane");
+    floorPlane = van.getObjectByName("floorPlane");
+    truckPlane = van.getObjectByName("truckPlane");
+    sidePlane = van.getObjectByName("sidePlane");
+    topPlane = van.getObjectByName("topPlane");
+    frontPlane = van.getObjectByName("frontPlane");
+
+    backPlane.visible = false;
+    floorPlane.visible = false;
+    truckPlane.visible = false;
+    sidePlane.visible = false;
+    topPlane.visible = false;
+    frontPlane.visible = false;
+    scene.position.set(0, -0.3, 0);
+    scene.add(van);
+  });
+}
+if (retrievedVanType === "Mercedes Benz") {
+  gltfLoader.load("/models/l3h3.glb", (gltf) => {
+    vanType = "Mercedes Benz";
+    van = gltf.scene;
+    backPlane = van.getObjectByName("backPlane");
+    floorPlane = van.getObjectByName("floorPlane");
+    truckPlane = van.getObjectByName("truckPlane");
+    sidePlane = van.getObjectByName("sidePlane");
+    topPlane = van.getObjectByName("topPlane");
+    frontPlane = van.getObjectByName("frontPlane");
+
+    backPlane.visible = false;
+    floorPlane.visible = false;
+    truckPlane.visible = false;
+    sidePlane.visible = false;
+    topPlane.visible = false;
+    frontPlane.visible = false;
+    scene.position.set(0, 0, 0);
+    scene.add(van);
+  });
+}
+
+/**
  * Toggle Items Menu
  */
 let kitchenAppliances = document.querySelector(".kitchen-appliances");
@@ -346,6 +360,7 @@ function toggleMenu(e) {
       bathroomAppliances.style.display = "none";
       furniture.style.display = "none";
       kitchenItems.style.display = "none";
+      shapes.style.display = "none";
     }
   }
   if (e.target.id === "bathroom-menu-btn") {
@@ -465,7 +480,6 @@ let widthInfo = document.getElementById("info-width");
 let infoSidebar = document.querySelector(".info-sidebar");
 
 function displaySidebar(modelName) {
-  console.log(modelName);
   if (modelName === "cabinet_1") {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/contributions/cabinet.png";
@@ -648,39 +662,49 @@ function attachControls(pointer) {
  *
  */
 function restrictingMovement() {
-  // backPlanebbox = new THREE.Box3().setFromObject(backPlane);
-  // floorPlanebbox = new THREE.Box3().setFromObject(floorPlane);
-  // truckPlanebbox = new THREE.Box3().setFromObject(truckPlane);
-  // sidePlanebbox = new THREE.Box3().setFromObject(sidePlane);
-  // topPlanebbox = new THREE.Box3().setFromObject(topPlane);
-  // for (const modelGroup of models) {
-  //   let model = modelGroup.model;
-  //   let modelBoundingBox = new THREE.Box3().setFromObject(model);
-  //   let modelSize = modelBoundingBox.getSize(new THREE.Vector3());
-  //   // restricting movement on the x axis with black plane
-  //   if (transformControls.mode === "translate") {
-  //     if (modelBoundingBox.max.x > backPlanebbox.max.x) {
-  //       model.position.x = backPlane.position.x - modelSize.x / 2;
-  //     }
-  //     // restricting movement on the y axis with top plane
-  //     if (modelBoundingBox.max.y > topPlanebbox.max.y) {
-  //       model.position.y = topPlane.position.y - modelSize.y / 2;
-  //     }
-  //     // restricting movement on the z axis with side plane
-  //     if (modelBoundingBox.min.z < sidePlanebbox.min.z) {
-  //       -(model.position.z = sidePlane.position.z + modelSize.z / 2);
-  //     }
-  //     // restricting movement on the x axis with truck plane
-  //     if (modelBoundingBox.min.x < truckPlanebbox.min.x) {
-  //       -(model.position.x = truckPlane.position.x + modelSize.x / 2);
-  //     }
-  //     // restricting movement on the y axis with floor plane
-  //     if (modelBoundingBox.min.y < floorPlanebbox.min.y) {
-  //       model.position.y = floorPlane.position.y + modelSize.y / 2;
-  //     }
-  //   }
-  //   displayModelSizes();
-  // }
+  backPlanebbox = new THREE.Box3().setFromObject(backPlane);
+  floorPlanebbox = new THREE.Box3().setFromObject(floorPlane);
+  truckPlanebbox = new THREE.Box3().setFromObject(truckPlane);
+  sidePlanebbox = new THREE.Box3().setFromObject(sidePlane);
+  topPlanebbox = new THREE.Box3().setFromObject(topPlane);
+  frontPlanebbox = new THREE.Box3().setFromObject(topPlane);
+
+  for (const modelGroup of models) {
+    let model = modelGroup.model;
+    let modelBoundingBox = new THREE.Box3().setFromObject(model);
+    console.log(modelBoundingBox);
+    console.log(frontPlanebbox);
+
+    let modelSize = modelBoundingBox.getSize(new THREE.Vector3());
+
+    // restricting movement on the x axis with black plane
+    if (transformControls.mode === "translate") {
+      if (modelBoundingBox.min.x < backPlanebbox.min.x) {
+        model.position.x = backPlane.position.x + modelSize.x / 3;
+      }
+      // restricting movement on the y axis with top plane
+      if (modelBoundingBox.max.y > topPlanebbox.max.y) {
+        model.position.y = topPlane.position.y - modelSize.y / 2;
+      }
+      // // restricting movement on the z axis with side plane
+      if (modelBoundingBox.min.z < sidePlanebbox.min.z) {
+        -(model.position.z = sidePlane.position.z + modelSize.z / 3);
+      }
+      // restricting movement on the x axis with truck plane
+      if (modelBoundingBox.max.x > truckPlanebbox.max.x) {
+        model.position.x = truckPlane.position.x - modelSize.x / 3;
+      }
+      // restricting movement on the y axis with floor plane
+      if (modelBoundingBox.min.y < floorPlanebbox.min.y) {
+        model.position.y = floorPlane.position.y + modelSize.y / 2;
+      }
+      // restricting movement on the y axis with floor plane
+      if (modelBoundingBox.max.z > frontPlanebbox.max.z + 3) {
+        model.position.z = frontPlane.position.z - modelSize.z / 2;
+      }
+    }
+  }
+  displayModelSizes();
 }
 
 transformControls.addEventListener("change", restrictingMovement);
