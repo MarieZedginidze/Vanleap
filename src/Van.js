@@ -146,7 +146,7 @@ const gltfLoader = new GLTFLoader(loadingManager);
 // Generating and Passing Coordinates for Models
 function passingPositions() {
   let x = -0.5;
-  let y = 0.9;
+  let y = 0.8;
   let z = 0;
   return { x, y, z };
 }
@@ -191,18 +191,17 @@ smallerUpperCabinet.addEventListener("click", () => {
   createModel(smallerUpperCabinetPath, passingPositions());
 });
 
-// Load and Pass a smaller hanged Toilet Model
-const hangedToiletPath = "/models/hangedToilet.glb";
-let hangedToilet = document.querySelector(".hangedToilet");
-hangedToilet.addEventListener("click", () => {
-  createModel(hangedToiletPath, passingPositions());
+// Load and Pass a smaller Shower Base Model
+const showerBasePath = "/models/showerBase.glb";
+let showerBase = document.querySelector(".showerBase");
+showerBase.addEventListener("click", () => {
+  createModel(showerBasePath, passingPositions());
 });
-
-// Load and Pass a smaller Shower Model
-const showerPath = "/models/shower.glb";
-let shower = document.querySelector(".shower");
-shower.addEventListener("click", () => {
-  createModel(showerPath, passingPositions());
+// Load and Pass a smaller Shower Base Model
+const showerFaucetPath = "/models/showerFaucet.glb";
+let showerFaucet = document.querySelector(".showerFaucet");
+showerFaucet.addEventListener("click", () => {
+  createModel(showerFaucetPath, passingPositions());
 });
 
 // Load and Pass a toilet Model
@@ -480,64 +479,20 @@ let widthInfo = document.getElementById("info-width");
 let infoSidebar = document.querySelector(".info-sidebar");
 
 function displaySidebar(modelName) {
-  if (modelName === "cabinet_1") {
+  if (
+    modelName === "cabinetBody" ||
+    "cabinetBottom" ||
+    "cabinetFront" ||
+    "cabinetHandlerEdges" ||
+    "cabinetHandlerMiddle" ||
+    "cabinetTop"
+  ) {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/contributions/cabinet.png";
 
     document.querySelector(".info-sidebar").style.display = "block";
   }
-  if (modelName === "cabinetWithBasin_1") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/contributions/cabinetWithBasin.png";
-  }
-  if (modelName === "drawers_1") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/contributions/drawers.png";
-  }
-  if (modelName === "glassDoorCabinet") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/contributions/glassdoorCabinet.png";
-  }
-  if (modelName === "smallerUpperCabinet_1") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/contributions/upperCabinet2.png";
-  }
-  if (modelName === "toilet_hang_round_1") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/contributions/toilet_hang_round.png";
-  }
-  if (modelName === "shower004") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/shower.png";
-  }
-  if (modelName === "water") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/lucapresidente/water.png";
-  }
-  if (
-    modelName === "bed_2_1" ||
-    modelName === "bed_2_3" ||
-    modelName === "bed_1"
-  ) {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/bed.png";
-  }
-  if (modelName === "Cube002") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/scopia/air-mattress.png";
-  }
-  if (modelName === "chest-freezer_1") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/scopia/chest-freezer.png";
-  }
-  if (modelName === "fridge_2" || modelName === "fridge_1") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/fridge.png";
-  }
-  if (modelName === "cooker001") {
-    document.getElementById("model-image").src =
-      "https://www.sweethome3d.com/models/cooker.png";
-  }
+
   if (modelName === "Cube") {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/box.png";
@@ -567,7 +522,6 @@ function toggleDeleteBtn(model) {
     // If there is no intersecting model, disable the button
     deleteBtn.classList.add("disabled");
   }
-  modelFromIntersection = model;
 }
 
 /**
@@ -577,7 +531,9 @@ function toggleDeleteBtn(model) {
 let deleteBtn = document.getElementById("delete-btn");
 function deleteModel() {
   if (modelFromIntersection) {
-    modelFromIntersection.parent.removeFromParent(scene);
+    console.log(modelFromIntersection);
+
+    modelFromIntersection.removeFromParent(scene);
     // remove model from the scene
     transformControls.detach();
     // Hide info Sidebar
@@ -630,6 +586,7 @@ function attachControls(pointer) {
         displaySidebar(intersectModel[0].object.name);
         toggleDeleteBtn(intersectModel[0].object);
         displayModelSizes();
+        modelFromIntersection = intersectedObject;
       } else {
         transformControls.detach();
         toggleDeleteBtn(undefined);
@@ -651,6 +608,7 @@ function attachControls(pointer) {
       displaySidebar(firstObject.children[0].name);
       toggleDeleteBtn(firstObject.children[0]);
       displayModelSizes();
+      modelFromIntersection = firstObject;
     } else {
       transformControls.detach();
       toggleDeleteBtn(undefined);
@@ -672,8 +630,6 @@ function restrictingMovement() {
   for (const modelGroup of models) {
     let model = modelGroup.model;
     let modelBoundingBox = new THREE.Box3().setFromObject(model);
-    console.log(modelBoundingBox);
-    console.log(frontPlanebbox);
 
     let modelSize = modelBoundingBox.getSize(new THREE.Vector3());
 
@@ -688,7 +644,7 @@ function restrictingMovement() {
       }
       // // restricting movement on the z axis with side plane
       if (modelBoundingBox.min.z < sidePlanebbox.min.z) {
-        -(model.position.z = sidePlane.position.z + modelSize.z / 3);
+        -(model.position.z = sidePlane.position.z + modelSize.z / 4);
       }
       // restricting movement on the x axis with truck plane
       if (modelBoundingBox.max.x > truckPlanebbox.max.x) {
@@ -696,7 +652,7 @@ function restrictingMovement() {
       }
       // restricting movement on the y axis with floor plane
       if (modelBoundingBox.min.y < floorPlanebbox.min.y) {
-        model.position.y = floorPlane.position.y + modelSize.y / 2;
+        model.position.y = floorPlane.position.y + modelSize.y / 2.5;
       }
       // restricting movement on the y axis with floor plane
       if (modelBoundingBox.min.z > -frontPlanebbox.min.z + modelSize.z * 2.8) {
