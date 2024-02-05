@@ -479,14 +479,7 @@ let widthInfo = document.getElementById("info-width");
 let infoSidebar = document.querySelector(".info-sidebar");
 
 function displaySidebar(modelName) {
-  if (
-    modelName === "cabinetBody" ||
-    "cabinetBottom" ||
-    "cabinetFront" ||
-    "cabinetHandlerEdges" ||
-    "cabinetHandlerMiddle" ||
-    "cabinetTop"
-  ) {
+  if (modelName === "cabinet_1" || "cabinet_2" || "cabinet_3" || "cabinet_4") {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/contributions/cabinet.png";
 
@@ -527,15 +520,15 @@ function toggleDeleteBtn(model) {
 /**
  * Delete the Model
  */
-
 let deleteBtn = document.getElementById("delete-btn");
 function deleteModel() {
   if (modelFromIntersection) {
-    console.log(modelFromIntersection);
+    while (modelFromIntersection.children.length > 0) {
+      modelFromIntersection.remove(modelFromIntersection.children[0]);
+    }
 
-    modelFromIntersection.removeFromParent(scene);
     // remove model from the scene
-    transformControls.detach();
+    transformControls.detach(modelFromIntersection);
     // Hide info Sidebar
     infoSidebar.style.display = "none";
   }
@@ -546,9 +539,9 @@ deleteBtn.addEventListener("click", deleteModel);
 let modelBoundingBox;
 let modelSize;
 
-function displayModelSizes() {
-  if (modelFromIntersection) {
-    modelBoundingBox = new THREE.Box3().setFromObject(modelFromIntersection);
+function displayModelSizes(model) {
+  if (model) {
+    modelBoundingBox = new THREE.Box3().setFromObject(model);
     modelSize = modelBoundingBox.getSize(new THREE.Vector3());
     lengthInfo.textContent =
       "Length in meters: " +
@@ -585,8 +578,12 @@ function attachControls(pointer) {
         // Check Model's Names and Send it to the Sidebar Function
         displaySidebar(intersectModel[0].object.name);
         toggleDeleteBtn(intersectModel[0].object);
-        displayModelSizes();
+        displayModelSizes(intersectedObject);
         modelFromIntersection = intersectedObject;
+
+        //Get Bounding Boxes to Restrict the Movement
+        modelBoundingBox = new THREE.Box3().setFromObject(modelGroup.model);
+        modelSize = modelBoundingBox.getSize(new THREE.Vector3());
       } else {
         transformControls.detach();
         toggleDeleteBtn(undefined);
@@ -607,7 +604,7 @@ function attachControls(pointer) {
       // Check Model's Names and Send it to the Sidebar Function
       displaySidebar(firstObject.children[0].name);
       toggleDeleteBtn(firstObject.children[0]);
-      displayModelSizes();
+      displayModelSizes(firstObject);
       modelFromIntersection = firstObject;
     } else {
       transformControls.detach();
@@ -616,10 +613,30 @@ function attachControls(pointer) {
   }
 }
 /**
- * Restrict Translation of an Object
+ * update Model Sizes
  *
  */
-function restrictingMovement() {
+function updateModelSizes() {
+  backPlanebbox = new THREE.Box3().setFromObject(backPlane);
+  floorPlanebbox = new THREE.Box3().setFromObject(floorPlane);
+  truckPlanebbox = new THREE.Box3().setFromObject(truckPlane);
+  sidePlanebbox = new THREE.Box3().setFromObject(sidePlane);
+  topPlanebbox = new THREE.Box3().setFromObject(topPlane);
+  frontPlanebbox = new THREE.Box3().setFromObject(topPlane);
+
+  if (modelFromIntersection) {
+    // Update Sizes in the Sidebar
+    lengthInfo.textContent =
+      "Length in meters: " +
+      Math.round((modelSize.x + Number.EPSILON) * 100) / 100;
+    heightInfo.textContent =
+      "Height in meters: " +
+      Math.round((modelSize.y + Number.EPSILON) * 100) / 100;
+    widthInfo.textContent =
+      "Width in meters: " +
+      Math.round((modelSize.z + Number.EPSILON) * 100) / 100;
+  }
+
   backPlanebbox = new THREE.Box3().setFromObject(backPlane);
   floorPlanebbox = new THREE.Box3().setFromObject(floorPlane);
   truckPlanebbox = new THREE.Box3().setFromObject(truckPlane);
@@ -630,6 +647,8 @@ function restrictingMovement() {
   for (const modelGroup of models) {
     let model = modelGroup.model;
     let modelBoundingBox = new THREE.Box3().setFromObject(model);
+    console.log(modelBoundingBox);
+    console.log(frontPlanebbox);
 
     let modelSize = modelBoundingBox.getSize(new THREE.Vector3());
 
@@ -644,7 +663,7 @@ function restrictingMovement() {
       }
       // // restricting movement on the z axis with side plane
       if (modelBoundingBox.min.z < sidePlanebbox.min.z) {
-        -(model.position.z = sidePlane.position.z + modelSize.z / 4);
+        -(model.position.z = sidePlane.position.z + modelSize.z / 3);
       }
       // restricting movement on the x axis with truck plane
       if (modelBoundingBox.max.x > truckPlanebbox.max.x) {
@@ -652,18 +671,19 @@ function restrictingMovement() {
       }
       // restricting movement on the y axis with floor plane
       if (modelBoundingBox.min.y < floorPlanebbox.min.y) {
-        model.position.y = floorPlane.position.y + modelSize.y / 2.5;
+        model.position.y = floorPlane.position.y + modelSize.y / 2;
       }
       // restricting movement on the y axis with floor plane
-      if (modelBoundingBox.min.z > -frontPlanebbox.min.z + modelSize.z * 2.8) {
-        model.position.z = frontPlane.position.z;
+      if (modelBoundingBox.max.z > frontPlanebbox.max.z + 3) {
+        model.position.z = frontPlane.position.z - modelSize.z / 2;
       }
     }
   }
-  displayModelSizes();
 }
 
-transformControls.addEventListener("change", restrictingMovement);
+// displayModelSizes();
+
+transformControls.addEventListener("change", updateModelSizes);
 
 // check if user drags and disable orbit controls
 transformControls.addEventListener("dragging-changed", (event) => {
