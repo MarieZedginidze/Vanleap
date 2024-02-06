@@ -192,16 +192,10 @@ smallerUpperCabinet.addEventListener("click", () => {
 });
 
 // Load and Pass a smaller Shower Base Model
-const showerBasePath = "/models/showerBase.glb";
-let showerBase = document.querySelector(".showerBase");
-showerBase.addEventListener("click", () => {
-  createModel(showerBasePath, passingPositions());
-});
-// Load and Pass a smaller Shower Base Model
-const showerFaucetPath = "/models/showerFaucet.glb";
-let showerFaucet = document.querySelector(".showerFaucet");
-showerFaucet.addEventListener("click", () => {
-  createModel(showerFaucetPath, passingPositions());
+const showerCabinPath = "/models/showerCabin.glb";
+let showerCabin = document.querySelector(".showerCabin");
+showerCabin.addEventListener("click", () => {
+  createModel(showerCabinPath, passingPositions());
 });
 
 // Load and Pass a toilet Model
@@ -212,24 +206,31 @@ toilet.addEventListener("click", () => {
 });
 
 // Load and Pass a bed Model
-const bedPath = "/models/bed.glb";
-let bed = document.querySelector(".bed");
-bed.addEventListener("click", () => {
-  createModel(bedPath, passingPositions());
+const doubleBedPath = "/models/doubleBed.glb";
+let doubleBed = document.querySelector(".doubleBed");
+doubleBed.addEventListener("click", () => {
+  createModel(doubleBedPath, passingPositions());
 });
-// Load and Pass a Mattress Model
-const mattressPath = "/models/mattress.glb";
-let mattress = document.querySelector(".mattress");
-mattress.addEventListener("click", () => {
-  createModel(mattressPath, passingPositions());
+// Load and Pass a Sofa Model
+const sofaPath = "/models/sofa.glb";
+let sofa = document.querySelector(".sofa");
+sofa.addEventListener("click", () => {
+  createModel(sofaPath, passingPositions());
 });
 
-// Load and Pass a Chest Freeser Model
-const chestFreezerPath = "/models/chestFreezer.glb";
-let chestFreezer = document.querySelector(".chestFreezer");
-chestFreezer.addEventListener("click", () => {
-  createModel(chestFreezerPath, passingPositions());
+// Load and Pass a Armchair Model
+const armchairPath = "/models/armchair.glb";
+let armchair = document.querySelector(".armchair");
+armchair.addEventListener("click", () => {
+  createModel(armchairPath, passingPositions());
 });
+// Load and Pass a Table Model
+const tablePath = "/models/table.glb";
+let table = document.querySelector(".table");
+table.addEventListener("click", () => {
+  createModel(tablePath, passingPositions());
+});
+
 // Load and Pass a Fridge Model
 const fridgePath = "/models/fridge.glb";
 let fridge = document.querySelector(".fridge");
@@ -479,13 +480,72 @@ let widthInfo = document.getElementById("info-width");
 let infoSidebar = document.querySelector(".info-sidebar");
 
 function displaySidebar(modelName) {
-  if (modelName === "cabinet_1" || "cabinet_2" || "cabinet_3" || "cabinet_4") {
+  if (modelName.indexOf("cabinet") > -1) {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/contributions/cabinet.png";
-
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("cabinetWithBasin") > -1) {
+    document.getElementById("model-image").src =
+      "  https://www.sweethome3d.com/models/contributions/cabinetWithBasin.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("drawers") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/contributions/drawers.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("glassDoorCabinet") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/contributions/glassdoorCabinet.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("smallerUpperCabinet") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/contributions/upperCabinet.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("water") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/lucapresidente/water.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("showerCabin") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/scopia/shower-cabin-with-seat.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("doubleBed") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/bed.png";
     document.querySelector(".info-sidebar").style.display = "block";
   }
 
+  if (modelName.indexOf("sofa") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/scopia/rattanSofa.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("armchair") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/scopia/rattanArmchair.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("table") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/lucapresidente/raccordo80W.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("cooker") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/blendswap-cc-by/largeStove.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+  if (modelName.indexOf("fridge") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/fridge.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
   if (modelName === "Cube") {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/box.png";
@@ -624,38 +684,15 @@ function updateModelSizes() {
   topPlanebbox = new THREE.Box3().setFromObject(topPlane);
   frontPlanebbox = new THREE.Box3().setFromObject(topPlane);
 
-  if (modelFromIntersection) {
-    // Update Sizes in the Sidebar
-    lengthInfo.textContent =
-      "Length in meters: " +
-      Math.round((modelSize.x + Number.EPSILON) * 100) / 100;
-    heightInfo.textContent =
-      "Height in meters: " +
-      Math.round((modelSize.y + Number.EPSILON) * 100) / 100;
-    widthInfo.textContent =
-      "Width in meters: " +
-      Math.round((modelSize.z + Number.EPSILON) * 100) / 100;
-  }
-
-  backPlanebbox = new THREE.Box3().setFromObject(backPlane);
-  floorPlanebbox = new THREE.Box3().setFromObject(floorPlane);
-  truckPlanebbox = new THREE.Box3().setFromObject(truckPlane);
-  sidePlanebbox = new THREE.Box3().setFromObject(sidePlane);
-  topPlanebbox = new THREE.Box3().setFromObject(topPlane);
-  frontPlanebbox = new THREE.Box3().setFromObject(topPlane);
-
   for (const modelGroup of models) {
     let model = modelGroup.model;
     let modelBoundingBox = new THREE.Box3().setFromObject(model);
-    console.log(modelBoundingBox);
-    console.log(frontPlanebbox);
-
     let modelSize = modelBoundingBox.getSize(new THREE.Vector3());
 
     // restricting movement on the x axis with black plane
     if (transformControls.mode === "translate") {
       if (modelBoundingBox.min.x < backPlanebbox.min.x) {
-        model.position.x = backPlane.position.x + modelSize.x / 3;
+        model.position.x = backPlane.position.x + modelSize.x / 2.3;
       }
       // restricting movement on the y axis with top plane
       if (modelBoundingBox.max.y > topPlanebbox.max.y) {
@@ -678,10 +715,9 @@ function updateModelSizes() {
         model.position.z = frontPlane.position.z - modelSize.z / 2;
       }
     }
+    displayModelSizes(model);
   }
 }
-
-// displayModelSizes();
 
 transformControls.addEventListener("change", updateModelSizes);
 
