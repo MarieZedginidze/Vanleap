@@ -152,6 +152,24 @@ strong {
   transform: scale(1.2);
 }
 
+.help-menu-btn {
+  font-size: 0.625rem;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  transform: none;
+  transition: none;
+  padding: 1em 1.5em 1em 1.1em;
+}
+
+.help-menu-btn:hover,
+.help-menu-btn:focus {
+  transform: none;
+}
+.help-menu-btn:hover .icon-svgs {
+  transform: scale(1.2);
+}
+
 /* =================
    Navbar 
    ================= */

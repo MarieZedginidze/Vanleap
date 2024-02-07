@@ -351,10 +351,17 @@ let furniture = document.querySelector(".furniture");
 let kitchenItems = document.querySelector(".kitchen-items");
 let shapes = document.querySelector(".shapes");
 let menuButtons = document.querySelectorAll(".menu-buttons");
+let helpBtn = document.querySelector(".help-menu-btn");
 
 for (const menuButton of menuButtons) {
   menuButton.addEventListener("click", toggleMenu);
 }
+
+helpBtn.addEventListener("click", () => {
+  window.location.replace(
+    "https://www.loom.com/share/e57eb607ca9841e38d47e3783def03fb?sid=a3953a8b-7307-4a20-bde8-2a72a342e1ce"
+  );
+});
 
 function toggleMenu(e) {
   if (e.target.id === "kitchen-menu-btn") {
