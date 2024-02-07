@@ -1,29 +1,20 @@
-@font-face {
-  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_thin";
-  src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_thin.woff2");
-}
-
-@font-face {
-  font-family: "Fontspring-DEMO-tt_commons_pro_expanded_demibold";
-  src: url("fonts/Fontspring-DEMO-tt_commons_pro_expanded_demibold.woff2");
-}
-@font-face {
-  font-family: "Gilroy-Thin";
-  src: url("fonts/Gilroy-Thin.ttf");
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
+
 body {
   margin: 0;
-  font-family: "Gilroy-Thin", Fallback, sans-serif;
+  font-family: "Kumbh Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  font-variation-settings: "YOPQ" 300;
   font-size: 1rem;
-  color: #0a0a0a;
+  color: #140f00;
   line-height: 1.6;
-  text-align: center;
+  cursor: url("./car.svg") 16 16, pointer;
 }
 
 button {
@@ -33,35 +24,46 @@ button {
   text-transform: uppercase;
   font-weight: 900;
   letter-spacing: 1px;
-  border: 1px solid black;
+  border: 1px solid #140f00;
   cursor: pointer;
   transform: scale(1);
   transition: transform 250ms;
 }
 button:hover,
-button:focus,
-img:hover,
-img:focus {
+button:focus {
   transform: scale(1.1);
 }
+a {
+  text-decoration: none;
+  color: #140f00;
+  display: block;
+}
+p {
+  padding: 0;
+  margin: 0;
+}
 
-nav,
-footer {
-  position: absolute;
+/* =================
+   Typography 
+   ================= */
+
+strong {
+  font-weight: 700;
+}
+
+/* =================
+   Navbar 
+   ================= */
+.smaller-device-logo {
+  display: none;
+}
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-}
-img {
-  max-width: 40vw;
-  max-height: 40vh;
-}
-/* =================
-   Navbar 
-   ================= */
-nav {
-  padding: 0 1em 0 6em;
+  min-height: 10vh;
+  padding: 2em 2em 0 6em;
 }
 
 .builderRedirectBtn {
@@ -73,31 +75,146 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2em;
+  gap: 1em;
+}
+/* =================
+   Choose Cars Section 
+   ================= */
+.choose-car-title-wrapper {
+  width: 100%;
+  min-height: 12vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.choose-car-title {
+  font-family: "Prompt", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin-bottom: 0;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+}
+.car-CTA {
+  min-height: 10vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.car-btn {
+  letter-spacing: 0.1em;
+}
+
+.cars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  max-width: 70%;
+  min-height: 58vh;
+  gap: 6em;
+  margin: 0 auto;
+}
+
+.car-images {
+  max-width: 100%;
+  cursor: pointer;
 }
 
 /* =================
-   Choose Car 
+   media queries 
    ================= */
-.choose-car-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 8em 0;
+@media (max-width: 1300px) {
+  .cars {
+    min-height: 55vh;
+  }
 }
-.cars {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2em;
-  padding: 2em;
+@media (min-width: 1024px) {
+  .device-warning {
+    display: none;
+  }
 }
-.car {
-  display: flex;
-  flex-direction: column;
+
+@media (max-width: 1024px) {
+  .device-warning {
+    width: 100%;
+    min-height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    background-color: #efefef;
+    font-size: 1.1em;
+    color: #140f00;
+  }
+  .cars {
+    min-height: 50vh;
+  }
 }
-.car-title {
-  padding: 1em;
+@media (max-width: 915px) {
+  nav {
+    padding: 2em 2em 0 2em;
+  }
+  .cars {
+    min-height: 45vh;
+  }
 }
-.car-images {
-  border: 1px solid black;
+@media (max-width: 800px) {
+  .cars {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 700px) {
+  .device-warning {
+    font-size: 1em;
+  }
+  .cars {
+    min-height: 42vh;
+  }
+  .choose-car-title {
+    font-size: 1em;
+  }
+}
+@media (max-width: 600px) {
+  .cars {
+    min-height: 35vh;
+  }
+  .choose-car-title {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 450px) {
+  .device-warning {
+    font-size: 0.9em;
+  }
+  .cars {
+    min-height: 30vh;
+  }
+}
+
+@media (max-width: 400px) {
+  .device-warning {
+    font-size: 0.7em;
+  }
+
+  nav {
+    padding: 0.5em;
+  }
+
+  .choose-car-title {
+    font-size: 1rem;
+  }
+  .cars {
+    flex-direction: column;
+    min-height: 80vh;
+    gap: 3em;
+    padding: 2em;
+  }
+  .car-CTA {
+    align-items: center;
+  }
+  .car-btn {
+    padding: 0.5em;
+  }
 }

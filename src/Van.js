@@ -230,7 +230,12 @@ let table = document.querySelector(".table");
 table.addEventListener("click", () => {
   createModel(tablePath, passingPositions());
 });
-
+// Load and Pass a chair Model
+const chairPath = "/models/chair.glb";
+let chair = document.querySelector(".chair");
+chair.addEventListener("click", () => {
+  createModel(chairPath, passingPositions());
+});
 // Load and Pass a Fridge Model
 const fridgePath = "/models/fridge.glb";
 let fridge = document.querySelector(".fridge");
@@ -536,6 +541,12 @@ function displaySidebar(modelName) {
       "https://www.sweethome3d.com/models/lucapresidente/raccordo80W.png";
     document.querySelector(".info-sidebar").style.display = "block";
   }
+  if (modelName.indexOf("chair") > -1) {
+    document.getElementById("model-image").src =
+      "https://www.sweethome3d.com/models/scopia/chair.png";
+    document.querySelector(".info-sidebar").style.display = "block";
+  }
+
   if (modelName.indexOf("cooker") > -1) {
     document.getElementById("model-image").src =
       "https://www.sweethome3d.com/models/blendswap-cc-by/largeStove.png";
@@ -700,7 +711,7 @@ function updateModelSizes() {
       }
       // // restricting movement on the z axis with side plane
       if (modelBoundingBox.min.z < sidePlanebbox.min.z) {
-        -(model.position.z = sidePlane.position.z + modelSize.z / 3);
+        -(model.position.z = sidePlane.position.z + modelSize.z / 4);
       }
       // restricting movement on the x axis with truck plane
       if (modelBoundingBox.max.x > truckPlanebbox.max.x) {

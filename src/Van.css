@@ -132,7 +132,7 @@ strong {
   display: none;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
-  padding-bottom: 2em;
+  padding-bottom: 4em;
 }
 .menu-buttons {
   font-size: 0.625rem;
@@ -229,6 +229,9 @@ nav {
   align-items: flex-end;
   justify-content: flex-end;
   gap: 1em;
+}
+#shape-menu-btn {
+  padding: 1.5em;
 }
 
 /* =================
