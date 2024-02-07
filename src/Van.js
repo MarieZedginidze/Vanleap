@@ -594,6 +594,11 @@ function toggleDeleteBtn(model) {
 let deleteBtn = document.getElementById("delete-btn");
 function deleteModel() {
   if (modelFromIntersection) {
+    let uuid = modelFromIntersection.uuid;
+    const newData = models.splice(models.indexOf(uuid), 1);
+    console.log(newData);
+    localStorage.setItem("localModels", JSON.stringify(newData));
+
     while (modelFromIntersection.children.length > 0) {
       modelFromIntersection.remove(modelFromIntersection.children[0]);
     }

@@ -249,6 +249,13 @@ footer {
     align-items: center;
     justify-content: center;
   }
+  #secondCTA {
+    display: none;
+  }
+  footer {
+    min-height: 15vh;
+    padding: 2em 1em 0 1em;
+  }
 }
 
 @media (max-width: 560px) {
@@ -298,17 +305,23 @@ footer {
     font-size: 2em;
   }
   .hero {
-    min-height: 25vh;
+    min-height: 10vh;
   }
 
   .device-warning {
     font-size: 0.9em;
+  }
+  .instructional-images {
+    min-height: 17vh;
   }
 }
 
 @media (max-width: 380px) {
   .hero-title {
     font-size: 1.7em;
+  }
+  .hero {
+    min-height: 8vh;
   }
   .hero-subtitle {
     font-size: 1em;

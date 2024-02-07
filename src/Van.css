@@ -328,7 +328,7 @@ nav {
 
 @media (max-width: 1024px) {
   .nav-buttons {
-    /* display: none; */
+    display: none;
   }
   nav {
     align-items: center;
@@ -342,7 +342,7 @@ nav {
     border: 1px #140f00 solid;
   }
   .choose-items-menu-container {
-    /* display: none; */
+    display: none;
   }
   .device-warning {
     position: absolute;
