@@ -358,8 +358,9 @@ for (const menuButton of menuButtons) {
 }
 
 helpBtn.addEventListener("click", () => {
-  window.location.replace(
-    "https://www.loom.com/share/e57eb607ca9841e38d47e3783def03fb?sid=a3953a8b-7307-4a20-bde8-2a72a342e1ce"
+  window.open(
+    "https://www.loom.com/share/e57eb607ca9841e38d47e3783def03fb?sid=a3953a8b-7307-4a20-bde8-2a72a342e1ce",
+    "_blank"
   );
 });
 
