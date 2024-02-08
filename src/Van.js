@@ -602,20 +602,26 @@ let deleteBtn = document.getElementById("delete-btn");
 function deleteModel() {
   if (modelFromIntersection) {
     let uuid = modelFromIntersection.uuid;
-    const newData = models.splice(models.indexOf(uuid), 1);
-    console.log(newData);
-    localStorage.setItem("localModels", JSON.stringify(newData));
 
-    while (modelFromIntersection.children.length > 0) {
-      modelFromIntersection.remove(modelFromIntersection.children[0]);
-    }
-
-    // remove model from the scene
-    transformControls.detach(modelFromIntersection);
-    // Hide info Sidebar
-    infoSidebar.style.display = "none";
+    var filtered = models.filter(function (el) {
+      return el.model.uuid != uuid;
+    });
+    models = filtered;
+    localStorage.setItem("localModels", JSON.stringify(models));
   }
+
+  // localStorage.setItem("localModels", JSON.stringify(models));
+
+  while (modelFromIntersection.children.length > 0) {
+    modelFromIntersection.remove(modelFromIntersection.children[0]);
+  }
+
+  // remove model from the scene
+  transformControls.detach(modelFromIntersection);
+  // Hide info Sidebar
+  infoSidebar.style.display = "none";
 }
+
 deleteBtn.addEventListener("click", deleteModel);
 
 // Display Sizes of the Models into the Info Sidebar Inputs
