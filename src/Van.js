@@ -3,6 +3,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { TransformControls } from "three/addons/controls/TransformControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { gsap } from "gsap";
+import vertexShader from "./shaders/Overlay/vertex.glsl";
+import fragmentShader from "./shaders/Overlay/fragment.glsl";
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -16,19 +18,8 @@ let scene = new THREE.Scene();
 const overlayGeometry = new THREE.PlaneGeometry(2, 1.55, 1, 1);
 const overlayMaterial = new THREE.ShaderMaterial({
   transparent: true,
-  vertexShader: `
-      void main()
-      {
-          gl_Position = vec4(position, 1.0);
-      }
-  `,
-  fragmentShader: `
-  uniform float uAlpha;
-      void main()
-      {
-        gl_FragColor = vec4(1.0, 1.0, 1.0, uAlpha);
-      }
-  `,
+  vertexShader: vertexShader,
+  fragmentShader: fragmentShader,
   uniforms: {
     uAlpha: { value: 1 },
   },
